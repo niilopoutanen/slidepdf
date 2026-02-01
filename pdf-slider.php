@@ -31,11 +31,26 @@ function pdf_slider_register_scripts()
         true
     );
 
+    wp_register_script(
+        'swiper',
+        plugins_url('scripts/swiper/swiper-bundle.min.js', __FILE__),
+        [],
+        '12.1.0',
+        true
+    );
+
     wp_register_style(
         'pdf-slider',
         plugins_url('styles.css', __FILE__),
         [],
         '1.0'
+    );
+
+    wp_register_style(
+        'swiper',
+        plugins_url('scripts/swiper/swiper-bundle.min.css', __FILE__),
+        [],
+        '12.1.0'
     );
 }
 add_action('wp_enqueue_scripts', 'pdf_slider_register_scripts');
@@ -58,14 +73,21 @@ function pdf_slider_render_shortcode($atts)
 
     wp_enqueue_script('pdfjs');
     wp_enqueue_script('pdf-slider');
+    wp_enqueue_script('swiper');
     wp_enqueue_style('pdf-slider');
+    wp_enqueue_style('swiper');
 
 
-    return '<div class="pdf-slider" data-pdf="' . esc_url($atts['src']) . '" data-worker="' . plugins_url('scripts/pdfjs/pdf.worker.js', __FILE__) . '">
-            <div class="swiper">
-                <div class="swiper-wrapper"></div>
-            </div>
-        </div>';
+    return
+        '<div class="pdf-slider" data-pdf="' . esc_url($atts['src']) . '" data-worker="' . plugins_url('scripts/pdfjs/pdf.worker.js', __FILE__) . '">
+        <div class="swiper">
+            <div class="swiper-wrapper"></div>
+            <div class="swiper-pagination"></div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+        </div>
+    </div>';
+
 
 }
 add_shortcode('pdf_slider', 'pdf_slider_render_shortcode');

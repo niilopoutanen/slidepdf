@@ -23,4 +23,18 @@ document.querySelectorAll('.pdf-slider').forEach(async (root) => {
 
         await page.render({ canvasContext: canvas.getContext('2d'), viewport }).promise;
     }
+    
+    new Swiper(root.querySelector('.swiper'), {
+        slidesPerView: 1,
+        spaceBetween: 10,
+        pagination: {
+            el: root.querySelector('.swiper-pagination'),
+            clickable: true,
+        },
+        navigation: {
+            nextEl: root.querySelector('.swiper-button-next'),
+            prevEl: root.querySelector('.swiper-button-prev'),
+        },
+        loop: false,
+    });
 });
