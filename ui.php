@@ -22,7 +22,8 @@ class UI
         ob_start();
         ?>
         <div class="pdf-slider-container">
-            <div class="pdf-slider" data-pdf="<?php echo esc_url($pdf_url); ?>" data-options="<?php echo $json_options; ?>">
+            <div class="pdf-slider" data-pdf="<?php echo esc_url($pdf_url); ?>"
+                data-options="<?php echo esc_attr($json_options); ?>">
                 <div class="swiper-wrapper">
 
                 </div>

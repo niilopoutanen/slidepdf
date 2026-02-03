@@ -168,7 +168,8 @@ class Elementor_Widget extends \Elementor\Widget_Base
         ];
 
         if ($pdf_url) {
-            echo UI::get_slider($pdf_url, $options);
+            echo wp_kses_post(UI::get_slider($pdf_url, $options));
+
         }
     }
 

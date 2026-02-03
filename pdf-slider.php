@@ -5,10 +5,12 @@ namespace PDF_Slider;
  * Plugin Name:       PDF Slider
  * Plugin URI:        https://github.com/niilopoutanen/pdf-slider
  * Description:       Load a PDF file into a embedded slider viewer.
- * Version:           0.0.1
+ * Version:           0.1
  * Author:            Niilo Poutanen
  * Author URI:        https://poutanen.dev/
  * Text Domain:       pdf-slider
+ * License:           GPLv2 or later
+ * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
  */
 
 if (!defined('ABSPATH')) {
