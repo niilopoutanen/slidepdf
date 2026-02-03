@@ -1,4 +1,5 @@
 <?php
+namespace PDF_Slider;
 
 /*
  * Plugin Name:       PDF Slider
@@ -13,7 +14,10 @@
 if (!defined('ABSPATH')) {
     exit;
 }
-function pdf_slider_register_scripts()
+
+require_once plugin_dir_path(__FILE__) . 'ui.php';
+
+function register_scripts()
 {
     wp_register_script(
         'pdfjs',
@@ -48,12 +52,20 @@ function pdf_slider_register_scripts()
 
     wp_register_style(
         'swiper',
-        plugins_url('scripts/swiper/swiper-bundle.min.css', __FILE__),
+        plugins_url('scripts/swiper/swiper.min.css', __FILE__),
         [],
         '12.1.0'
     );
+
+    wp_register_style(
+        'swiper-pagination',
+        plugins_url('scripts/swiper/pagination-element.min.css', __FILE__),
+        [],
+        '12.1.0'
+    );
+
 }
-add_action('wp_enqueue_scripts', 'pdf_slider_register_scripts');
+add_action('wp_enqueue_scripts', '\PDF_Slider\register_scripts');
 
 add_filter('script_loader_tag', function ($tag, $handle) {
     if (in_array($handle, ['pdfjs', 'pdf-slider'], true)) {
@@ -62,32 +74,17 @@ add_filter('script_loader_tag', function ($tag, $handle) {
     return $tag;
 }, 10, 2);
 
-function pdf_slider_render_shortcode($atts)
+function render_shortcode($atts)
 {
     $atts = shortcode_atts([
         'src' => '',
     ], $atts);
 
-    if (empty($atts['src']))
+    if (empty($atts['src'])) {
         return '';
+    }
 
-    wp_enqueue_script('pdfjs');
-    wp_enqueue_script('pdf-slider');
-    wp_enqueue_script('swiper');
-    wp_enqueue_style('pdf-slider');
-    wp_enqueue_style('swiper');
-
-
-    return
-        '<div class="pdf-slider" data-pdf="' . esc_url($atts['src']) . '" data-worker="' . plugins_url('scripts/pdfjs/pdf.worker.js', __FILE__) . '">
-        <div class="swiper">
-            <div class="swiper-wrapper"></div>
-            <div class="swiper-pagination"></div>
-            <div class="swiper-button-next"></div>
-            <div class="swiper-button-prev"></div>
-        </div>
-    </div>';
-
-
+    return UI::get_slider($atts['src']);
 }
-add_shortcode('pdf_slider', 'pdf_slider_render_shortcode');
+
+add_shortcode('pdf_slider', '\PDF_Slider\render_shortcode');

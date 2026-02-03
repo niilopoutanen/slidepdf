@@ -1,6 +1,60 @@
-.pdf-slider{
+.pdf-slider-container{
 
+    overflow: hidden;
+}
 
+.pdf-slider .swiper-slide{
+    border-radius: 20px;
+    overflow: hidden;
+    background-color: #121212;
+}
+
+.pdf-slider .controls{
+    display: flex;
+    margin-top: 10px;
+    gap: 10px;
+    align-items: center;
+}
+.pdf-slider .controls .download{
+    background-color: #e6e6e6;
+    padding: 10px 20px;
+    font-size: 15px;
+    border-radius: 1000px;
+    height: 40px;
+    box-sizing: border-box;
+    text-decoration: none;
+
+}
+.pdf-slider .swiper-button-prev, .swiper-button-next{
+    position: relative !important;
+    background-color: #e6e6e6;
+    padding: 10px;
+    border-radius: 1000px;
+    width: 40px !important;
+    height: 40px !important;
+    box-sizing: border-box;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.pdf-slider .swiper-button-prev svg, .swiper-button-next svg{
+    width: 20px !important;
+    height: 20px !important;
+    fill: #121212 !important;
+}
+.pdf-slider .swiper-button-prev svg{
+    transform: rotate(-180deg);
+}
+
+.pdf-slider .swiper-pagination{
+    position: relative !important;
+    text-align: start !important;
+    
+    top: unset !important;
+    bottom: unset !important;
+    right: unset !important;
+    left: unset !important;
 }
 
 .pdf-slider canvas{
