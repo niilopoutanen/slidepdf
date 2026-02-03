@@ -85,10 +85,6 @@ add_action('elementor/widgets/register', function ($widgets_manager) {
 
 function render_shortcode($atts)
 {
-    $atts = shortcode_atts([
-        'src' => '',
-    ], $atts);
-
     if (empty($atts['src'])) {
         return '';
     }

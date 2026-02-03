@@ -90,7 +90,7 @@ class Elementor_Widget extends \Elementor\Widget_Base
             [
                 'label' => esc_html__('Select PDF', 'pdf-slider'),
                 'type' => \Elementor\Controls_Manager::MEDIA,
-                'media_types' => [ 'application/pdf' ],
+                'media_types' => ['application/pdf'],
                 'dynamic' => [
                     'active' => true,
                 ],
@@ -101,6 +101,52 @@ class Elementor_Widget extends \Elementor\Widget_Base
         );
 
         $this->end_controls_section();
+
+        $this->start_controls_section(
+            'section_style',
+            [
+                'label' => esc_html__('Style', 'pdf-slider'),
+                'tab' => \Elementor\Controls_Manager::TAB_STYLE,
+            ]
+        );
+
+
+        $this->add_control(
+            'slides_per_view',
+            [
+                'label' => esc_html__('Slides per page', 'pdf-slider'),
+                'type' => \Elementor\Controls_Manager::NUMBER,
+                'min' => 1,
+                'max' => 10,
+                'step' => 1,
+                'default' => 1,
+            ]
+        );
+
+        $this->add_control(
+            'space_between',
+            [
+                'label' => esc_html__('Space between slides', 'pdf-slider'),
+                'type' => \Elementor\Controls_Manager::NUMBER,
+                'min' => 0,
+                'step' => 1,
+                'default' => 10,
+            ]
+        );
+
+        $this->add_control(
+            'loop',
+            [
+                'label' => esc_html__('Loop slides', 'pdf-slider'),
+                'type' => \Elementor\Controls_Manager::SWITCHER,
+                'label_on' => esc_html__('Yes', 'pdf-slider'),
+                'label_off' => esc_html__('No', 'pdf-slider'),
+                'return_value' => 'yes',
+                'default' => '',
+            ]
+        );
+        $this->end_controls_section();
+
     }
 
 
@@ -109,15 +155,20 @@ class Elementor_Widget extends \Elementor\Widget_Base
         $settings = $this->get_settings_for_display();
 
         $pdf_url = '';
-
         if (!empty($settings['use_media_library']) && $settings['use_media_library'] === 'yes') {
             $pdf_url = $settings['pdf_file']['url'] ?? '';
         } else {
             $pdf_url = $settings['pdf_url'] ?? '';
         }
 
+        $options = [
+            'slides_per_view' => (int) ($settings['slides_per_view'] ?? 1),
+            'space_between' => (int) ($settings['space_between'] ?? 10),
+            'loop' => !empty($settings['loop']),
+        ];
+
         if ($pdf_url) {
-            echo UI::get_slider($pdf_url);
+            echo UI::get_slider($pdf_url, $options);
         }
     }
 

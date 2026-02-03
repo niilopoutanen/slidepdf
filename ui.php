@@ -3,7 +3,13 @@ namespace PDF_Slider;
 
 class UI
 {
-    public static function get_slider(string $pdf_url): string
+    /**
+     * @param string $pdf_url
+     * @param array $options
+     */
+
+
+    public static function get_slider(string $pdf_url, array $options = []): string
     {
         wp_enqueue_script('pdfjs');
         wp_enqueue_script('pdf-slider');
@@ -11,12 +17,12 @@ class UI
         wp_enqueue_style('pdf-slider');
         wp_enqueue_style('swiper');
 
-        wp_enqueue_style('swiper-pagination');
+        $json_options = esc_attr(wp_json_encode($options));
 
         ob_start();
         ?>
         <div class="pdf-slider-container">
-            <div class="pdf-slider" data-pdf="<?php echo esc_url($pdf_url); ?>">
+            <div class="pdf-slider" data-pdf="<?php echo esc_url($pdf_url); ?>" data-options="<?php echo $json_options; ?>">
                 <div class="swiper-wrapper">
 
                 </div>
@@ -32,5 +38,4 @@ class UI
         <?php
         return ob_get_clean();
     }
-
 }
