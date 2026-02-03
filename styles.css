@@ -1,6 +1,8 @@
 .pdf-slider-container{
 
     overflow: hidden;
+    --swiper-navigation-color: #000000;
+    --swiper-navigation-size: 20px;
 }
 
 .pdf-slider .swiper-slide{
@@ -25,6 +27,7 @@
     text-decoration: none;
 
 }
+
 .pdf-slider .swiper-button-prev, .swiper-button-next{
     position: relative !important;
     background-color: #e6e6e6;
@@ -37,6 +40,13 @@
     display: flex;
     align-items: center;
     justify-content: center;
+
+    left: unset !important;
+    top: unset !important;
+    right: unset !important;
+    bottom: unset !important;
+    margin: 0 !important;
+    aspect-ratio: 1;
 }
 .pdf-slider .swiper-button-prev svg, .swiper-button-next svg{
     width: 20px !important;
@@ -55,7 +65,7 @@
     bottom: unset !important;
     right: unset !important;
     left: unset !important;
-}
+} 
 
 .pdf-slider canvas{
     width: 100%;
