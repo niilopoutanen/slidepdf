@@ -60,6 +60,18 @@ class Elementor_Widget extends \Elementor\Widget_Base
         );
 
         $this->add_control(
+            'use_media_library',
+            [
+                'label' => esc_html__('Use Media Library?', 'pdf-slider'),
+                'type' => \Elementor\Controls_Manager::SWITCHER,
+                'label_on' => esc_html__('Yes', 'pdf-slider'),
+                'label_off' => esc_html__('No', 'pdf-slider'),
+                'return_value' => 'yes',
+                'default' => '',
+            ]
+        );
+
+        $this->add_control(
             'pdf_url',
             [
                 'label' => esc_html__('PDF URL', 'pdf-slider'),
@@ -67,17 +79,47 @@ class Elementor_Widget extends \Elementor\Widget_Base
                 'input_type' => 'url',
                 'placeholder' => esc_html__('https://example.com/sample.pdf', 'pdf-slider'),
                 'default' => '',
+                'condition' => [
+                    'use_media_library!' => 'yes',
+                ],
+            ]
+        );
+
+        $this->add_control(
+            'pdf_file',
+            [
+                'label' => esc_html__('Select PDF', 'pdf-slider'),
+                'type' => \Elementor\Controls_Manager::MEDIA,
+                'media_types' => [ 'application/pdf' ],
+                'dynamic' => [
+                    'active' => true,
+                ],
+                'condition' => [
+                    'use_media_library' => 'yes',
+                ],
             ]
         );
 
         $this->end_controls_section();
     }
 
+
     protected function render(): void
     {
         $settings = $this->get_settings_for_display();
 
-        echo UI::get_slider($settings["pdf_url"]);
+        $pdf_url = '';
+
+        if (!empty($settings['use_media_library']) && $settings['use_media_library'] === 'yes') {
+            $pdf_url = $settings['pdf_file']['url'] ?? '';
+        } else {
+            $pdf_url = $settings['pdf_url'] ?? '';
+        }
+
+        if ($pdf_url) {
+            echo UI::get_slider($pdf_url);
+        }
     }
+
 
 }

@@ -74,6 +74,15 @@ add_filter('script_loader_tag', function ($tag, $handle) {
     return $tag;
 }, 10, 2);
 
+
+add_action('elementor/widgets/register', function ($widgets_manager) {
+    if (defined('ELEMENTOR_PATH') && class_exists('\Elementor\Widget_Base')) {
+        require_once plugin_dir_path(__FILE__) . 'elementor-widget.php';
+
+        $widgets_manager->register(new Elementor_Widget());
+    }
+});
+
 function render_shortcode($atts)
 {
     $atts = shortcode_atts([

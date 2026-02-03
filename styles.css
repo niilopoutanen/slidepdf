@@ -5,10 +5,15 @@
     --swiper-navigation-size: 20px;
 }
 
+.pdf-slider .swiper-wrapper{
+    min-height: 200px;
+
+}
+
 .pdf-slider .swiper-slide{
     border-radius: 20px;
     overflow: hidden;
-    background-color: #121212;
+    border: 2px solid #84848444;
 }
 
 .pdf-slider .controls{
