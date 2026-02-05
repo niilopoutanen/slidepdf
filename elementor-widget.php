@@ -1,5 +1,5 @@
 <?php
-namespace PDF_Slider;
+namespace SlidePDF;
 
 
 class Elementor_Widget extends \Elementor\Widget_Base
@@ -7,12 +7,12 @@ class Elementor_Widget extends \Elementor\Widget_Base
 
     public function get_name(): string
     {
-        return 'pdf-slider';
+        return 'slidepdf';
     }
 
     public function get_title(): string
     {
-        return esc_html__('PDF Slider', 'pdf-slider');
+        return esc_html__('SlidePDF', 'slidepdf');
     }
 
     public function get_icon(): string
@@ -32,12 +32,12 @@ class Elementor_Widget extends \Elementor\Widget_Base
 
     public function get_script_depends(): array
     {
-        return ['pdfjs', 'pdf-slider', 'swiper'];
+        return ['pdfjs', 'slidepdf', 'swiper'];
     }
 
     public function get_style_depends(): array
     {
-        return ['pdf-slider', 'swiper'];
+        return ['slidepdf', 'swiper'];
     }
 
     public function has_widget_inner_wrapper(): bool
@@ -55,17 +55,17 @@ class Elementor_Widget extends \Elementor\Widget_Base
         $this->start_controls_section(
             'section_content',
             [
-                'label' => esc_html__('Content', 'pdf-slider'),
+                'label' => esc_html__('Content', 'slidepdf'),
             ]
         );
 
         $this->add_control(
             'use_media_library',
             [
-                'label' => esc_html__('Use Media Library?', 'pdf-slider'),
+                'label' => esc_html__('Use Media Library?', 'slidepdf'),
                 'type' => \Elementor\Controls_Manager::SWITCHER,
-                'label_on' => esc_html__('Yes', 'pdf-slider'),
-                'label_off' => esc_html__('No', 'pdf-slider'),
+                'label_on' => esc_html__('Yes', 'slidepdf'),
+                'label_off' => esc_html__('No', 'slidepdf'),
                 'return_value' => 'yes',
                 'default' => '',
             ]
@@ -74,10 +74,10 @@ class Elementor_Widget extends \Elementor\Widget_Base
         $this->add_control(
             'pdf_url',
             [
-                'label' => esc_html__('PDF URL', 'pdf-slider'),
+                'label' => esc_html__('PDF URL', 'slidepdf'),
                 'type' => \Elementor\Controls_Manager::TEXT,
                 'input_type' => 'url',
-                'placeholder' => esc_html__('https://example.com/sample.pdf', 'pdf-slider'),
+                'placeholder' => esc_html__('https://example.com/sample.pdf', 'slidepdf'),
                 'default' => '',
                 'condition' => [
                     'use_media_library!' => 'yes',
@@ -88,7 +88,7 @@ class Elementor_Widget extends \Elementor\Widget_Base
         $this->add_control(
             'pdf_file',
             [
-                'label' => esc_html__('Select PDF', 'pdf-slider'),
+                'label' => esc_html__('Select PDF', 'slidepdf'),
                 'type' => \Elementor\Controls_Manager::MEDIA,
                 'media_types' => ['application/pdf'],
                 'dynamic' => [
@@ -105,7 +105,7 @@ class Elementor_Widget extends \Elementor\Widget_Base
         $this->start_controls_section(
             'section_style',
             [
-                'label' => esc_html__('Style', 'pdf-slider'),
+                'label' => esc_html__('Style', 'slidepdf'),
                 'tab' => \Elementor\Controls_Manager::TAB_STYLE,
             ]
         );
@@ -114,7 +114,7 @@ class Elementor_Widget extends \Elementor\Widget_Base
         $this->add_control(
             'slides_per_view',
             [
-                'label' => esc_html__('Slides per page', 'pdf-slider'),
+                'label' => esc_html__('Slides per page', 'slidepdf'),
                 'type' => \Elementor\Controls_Manager::NUMBER,
                 'min' => 1,
                 'max' => 10,
@@ -126,7 +126,7 @@ class Elementor_Widget extends \Elementor\Widget_Base
         $this->add_control(
             'space_between',
             [
-                'label' => esc_html__('Space between slides', 'pdf-slider'),
+                'label' => esc_html__('Space between slides', 'slidepdf'),
                 'type' => \Elementor\Controls_Manager::NUMBER,
                 'min' => 0,
                 'step' => 1,
@@ -137,10 +137,10 @@ class Elementor_Widget extends \Elementor\Widget_Base
         $this->add_control(
             'loop',
             [
-                'label' => esc_html__('Loop slides', 'pdf-slider'),
+                'label' => esc_html__('Loop slides', 'slidepdf'),
                 'type' => \Elementor\Controls_Manager::SWITCHER,
-                'label_on' => esc_html__('Yes', 'pdf-slider'),
-                'label_off' => esc_html__('No', 'pdf-slider'),
+                'label_on' => esc_html__('Yes', 'slidepdf'),
+                'label_off' => esc_html__('No', 'slidepdf'),
                 'return_value' => 'yes',
                 'default' => '',
             ]

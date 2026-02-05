@@ -1,17 +1,17 @@
-=== PDF Slider ===
+=== SlidePDF ===
 
 Contributors: niilopoutanen
-Tags: pdf, pdf-viewer, pdf-slider, embed-pdf, pdf-embedder
+Tags: pdf, pdf-viewer, slidepdf, embed-pdf, pdf-embedder
 License: GPLv2 or later
 Tested up to: 6.9
 Stable tag: 0.1
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-PDF Slider is a simple way to embed PDFs to your site in a simple slider view.
+SlidePDF is a simple way to embed PDFs to your site in a simple slider view.
 
 == Description ==
 
-PDF Slider allows you to embed PDF documents into a Swiper-based slider. It supports:
+SlidePDF allows you to embed PDF documents into a Swiper-based slider. It supports:
 
 * Multiple pages rendered as slides
 * Configurable slides per view, spacing, and looping

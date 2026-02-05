@@ -4,7 +4,7 @@ pdfjsLib.GlobalWorkerOptions.workerSrc =
     new URL('./pdfjs/pdf.worker.js', import.meta.url).toString();
 
 
-document.querySelectorAll('.pdf-slider').forEach(async (root) => {
+document.querySelectorAll('.slidepdf').forEach(async (root) => {
     const pdfUrl = root.dataset.pdf;
     const options = JSON.parse(root.dataset.options || '{}');
 

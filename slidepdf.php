@@ -1,14 +1,14 @@
 <?php
-namespace PDF_Slider;
+namespace SlidePDF;
 
 /*
- * Plugin Name:       PDF Slider
- * Plugin URI:        https://github.com/niilopoutanen/pdf-slider
+ * Plugin Name:       SlidePDF
+ * Plugin URI:        https://github.com/niilopoutanen/slidepdf
  * Description:       Load a PDF file into a embedded slider viewer.
  * Version:           0.1
  * Author:            Niilo Poutanen
  * Author URI:        https://poutanen.dev/
- * Text Domain:       pdf-slider
+ * Text Domain:       slidepdf
  * License:           GPLv2 or later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
  */
@@ -30,8 +30,8 @@ function register_scripts()
     );
 
     wp_register_script(
-        'pdf-slider',
-        plugins_url('scripts/pdf-slider.js', __FILE__),
+        'slidepdf',
+        plugins_url('scripts/slidepdf.js', __FILE__),
         ['pdfjs'],
         '1.0',
         true
@@ -46,7 +46,7 @@ function register_scripts()
     );
 
     wp_register_style(
-        'pdf-slider',
+        'slidepdf',
         plugins_url('styles.css', __FILE__),
         [],
         '1.0'
@@ -67,10 +67,10 @@ function register_scripts()
     );
 
 }
-add_action('wp_enqueue_scripts', '\PDF_Slider\register_scripts');
+add_action('wp_enqueue_scripts', '\SlidePDF\register_scripts');
 
 add_filter('script_loader_tag', function ($tag, $handle) {
-    if (in_array($handle, ['pdfjs', 'pdf-slider'], true)) {
+    if (in_array($handle, ['pdfjs', 'slidepdf'], true)) {
         return str_replace('<script ', '<script type="module" ', $tag);
     }
     return $tag;
@@ -94,4 +94,4 @@ function render_shortcode($atts)
     return UI::get_slider($atts['src']);
 }
 
-add_shortcode('pdf_slider', '\PDF_Slider\render_shortcode');
+add_shortcode('slidepdf', '\SlidePDF\render_shortcode');

@@ -1,8 +1,8 @@
 <?php
-namespace PDF_Slider;
+namespace SlidePDF;
 
 add_action('admin_menu', function () {
-    add_management_page('PDF Slider', 'PDF Slider', 'install_plugins', 'pdf-slider', '\PDF_Slider\render_page', '');
+    add_management_page('SlidePDF', 'SlidePDF', 'install_plugins', 'slidepdf', '\SlidePDF\render_page', '');
 });
 
 function render_page()
@@ -61,7 +61,7 @@ function render_page()
     <div class="header section">
         <img class="icon" src="<?php echo plugin_dir_url(__FILE__); ?>assets/icon.svg" />
         <div class="content">
-            <h1>PDF Slider</h1>
+            <h1>SlidePDF</h1>
             <p>Simple way to embed PDFs on your website</p>
         </div>
 
@@ -69,10 +69,10 @@ function render_page()
 
     <div class="section guide">
         <h2>Usage</h2>
-        <code class="shortcode" onclick="copyShortcode()">[pdf_slider src="https://example.com/file.pdf"]</code>
+        <code class="shortcode" onclick="copyShortcode()">[slidepdf src="https://example.com/file.pdf"]</code>
         <script>
             function copyShortcode(){
-                navigator.clipboard.writeText('[pdf_slider src="https://example.com/file.pdf"]')
+                navigator.clipboard.writeText('[slidepdf src="https://example.com/file.pdf"]')
             }
         </script>
     </div>

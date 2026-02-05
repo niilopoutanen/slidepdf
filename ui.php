@@ -1,5 +1,5 @@
 <?php
-namespace PDF_Slider;
+namespace SlidePDF;
 
 class UI
 {
@@ -12,17 +12,17 @@ class UI
     public static function get_slider(string $pdf_url, array $options = []): string
     {
         wp_enqueue_script('pdfjs');
-        wp_enqueue_script('pdf-slider');
+        wp_enqueue_script('slidepdf');
         wp_enqueue_script('swiper');
-        wp_enqueue_style('pdf-slider');
+        wp_enqueue_style('slidepdf');
         wp_enqueue_style('swiper');
 
         $json_options = esc_attr(wp_json_encode($options));
 
         ob_start();
         ?>
-        <div class="pdf-slider-container">
-            <div class="pdf-slider" data-pdf="<?php echo esc_url($pdf_url); ?>"
+        <div class="slidepdf-container">
+            <div class="slidepdf" data-pdf="<?php echo esc_url($pdf_url); ?>"
                 data-options="<?php echo esc_attr($json_options); ?>">
                 <div class="swiper-wrapper">
 

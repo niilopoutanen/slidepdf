@@ -1,28 +1,28 @@
-.pdf-slider-container{
+.slidepdf-container{
 
     overflow: hidden;
     --swiper-navigation-color: #000000;
     --swiper-navigation-size: 20px;
 }
 
-.pdf-slider .swiper-wrapper{
+.slidepdf .swiper-wrapper{
     min-height: 200px;
 
 }
 
-.pdf-slider .swiper-slide{
+.slidepdf .swiper-slide{
     border-radius: 20px;
     overflow: hidden;
     border: 2px solid #84848444;
 }
 
-.pdf-slider .controls{
+.slidepdf .controls{
     display: flex;
     margin-top: 10px;
     gap: 10px;
     align-items: center;
 }
-.pdf-slider .controls .download{
+.slidepdf .controls .download{
     background-color: #e6e6e6;
     padding: 10px 20px;
     font-size: 15px;
@@ -33,7 +33,7 @@
 
 }
 
-.pdf-slider .swiper-button-prev, .swiper-button-next{
+.slidepdf .swiper-button-prev, .swiper-button-next{
     position: relative !important;
     background-color: #e6e6e6;
     padding: 10px;
@@ -53,16 +53,16 @@
     margin: 0 !important;
     aspect-ratio: 1;
 }
-.pdf-slider .swiper-button-prev svg, .swiper-button-next svg{
+.slidepdf .swiper-button-prev svg, .swiper-button-next svg{
     width: 20px !important;
     height: 20px !important;
     fill: #121212 !important;
 }
-.pdf-slider .swiper-button-prev svg{
+.slidepdf .swiper-button-prev svg{
     transform: rotate(-180deg);
 }
 
-.pdf-slider .swiper-pagination{
+.slidepdf .swiper-pagination{
     position: relative !important;
     text-align: start !important;
     
@@ -72,6 +72,6 @@
     left: unset !important;
 } 
 
-.pdf-slider canvas{
+.slidepdf canvas{
     width: 100%;
 }
