@@ -1,28 +1,30 @@
-.slidepdf-container{
+.slidepdf-container {
 
     overflow: hidden;
     --swiper-navigation-color: #000000;
     --swiper-navigation-size: 20px;
 }
 
-.slidepdf .swiper-wrapper{
+.slidepdf .swiper-wrapper {
     min-height: 200px;
 
 }
 
-.slidepdf .swiper-slide{
+.slidepdf .swiper-slide {
     border-radius: 20px;
     overflow: hidden;
     border: 2px solid #84848444;
+    box-sizing: border-box;
 }
 
-.slidepdf .controls{
+.slidepdf .controls {
     display: flex;
     margin-top: 10px;
     gap: 10px;
     align-items: center;
 }
-.slidepdf .controls .download{
+
+.slidepdf .controls .download {
     background-color: #e6e6e6;
     padding: 10px 20px;
     font-size: 15px;
@@ -30,14 +32,19 @@
     height: 40px;
     box-sizing: border-box;
     text-decoration: none;
+    margin-left: auto;
+    font-weight: 500;
+    transition: transform 0.2s ease, opacity 0.2s;
 
 }
 
-.slidepdf .swiper-button-prev, .swiper-button-next{
+.slidepdf .navigation {
     position: relative !important;
     background-color: #e6e6e6;
     padding: 10px;
     border-radius: 1000px;
+    outline: none;
+    border: none;
     width: 40px !important;
     height: 40px !important;
     box-sizing: border-box;
@@ -52,26 +59,43 @@
     bottom: unset !important;
     margin: 0 !important;
     aspect-ratio: 1;
+
+    transition: transform 0.2s ease, opacity 0.2s;
 }
-.slidepdf .swiper-button-prev svg, .swiper-button-next svg{
+
+.slidepdf .navigation.swiper-button-disabled {
+    opacity: 0.5;
+}
+
+.slidepdf button:active,
+.slidepdf a:active {
+    transform: scale(0.9);
+}
+
+.slidepdf .navigation svg {
     width: 20px !important;
     height: 20px !important;
     fill: #121212 !important;
 }
-.slidepdf .swiper-button-prev svg{
+
+.slidepdf .navigation svg path {
+    fill: #121212 !important;
+}
+
+.slidepdf .next svg {
     transform: rotate(-180deg);
 }
 
-.slidepdf .swiper-pagination{
+.slidepdf .swiper-pagination {
     position: relative !important;
     text-align: start !important;
-    
+
     top: unset !important;
     bottom: unset !important;
     right: unset !important;
     left: unset !important;
-} 
+}
 
-.slidepdf canvas{
+.slidepdf canvas {
     width: 100%;
 }

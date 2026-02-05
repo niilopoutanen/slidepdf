@@ -20,8 +20,8 @@ document.querySelectorAll('.slidepdf').forEach(async (root) => {
             clickable: true,
         },
         navigation: {
-            nextEl: root.querySelector('.swiper-button-next'),
-            prevEl: root.querySelector('.swiper-button-prev'),
+            nextEl: root.querySelector('.next'),
+            prevEl: root.querySelector('.previous'),
         },
         loop: false,
     });

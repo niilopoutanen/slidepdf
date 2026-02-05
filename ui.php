@@ -19,6 +19,11 @@ class UI
 
         $json_options = esc_attr(wp_json_encode($options));
 
+        $chevron_svg = file_get_contents(
+            plugin_dir_path(__FILE__) . 'assets/chevron.svg'
+        );
+
+
         ob_start();
         ?>
         <div class="slidepdf-container">
@@ -29,8 +34,12 @@ class UI
                 </div>
 
                 <div class="controls">
-                    <div class="swiper-button-prev"></div>
-                    <div class="swiper-button-next"></div>
+                    <button class="previous navigation">
+                        <?php echo $chevron_svg; ?>
+                    </button>
+                    <button class="next navigation">
+                        <?php echo $chevron_svg; ?>
+                    </button>
                     <div class="swiper-pagination"></div>
                     <a class="download" href="<?php echo esc_url($pdf_url); ?>" download>Download</a>
                 </div>
