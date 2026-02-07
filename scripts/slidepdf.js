@@ -6,14 +6,14 @@ pdfjsLib.GlobalWorkerOptions.workerSrc =
 
 document.querySelectorAll('.slidepdf').forEach(async (root) => {
     const pdfUrl = root.dataset.pdf;
-    const options = JSON.parse(root.dataset.options || '{}');
+    const options = JSON.parse(root.dataset.swiperconfig || '{}');
 
     const wrapper = root.querySelector('.swiper-wrapper');
     const pdf = await pdfjsLib.getDocument(pdfUrl).promise;
 
     let swiper = new Swiper(root, {
-        slidesPerView: options.slides_per_view ?? 1,
-        spaceBetween: options.space_between ?? 10,
+        slidesPerView: options.slidesPerView ?? 1,
+        spaceBetween: options.spaceBetween ?? 10,
         loop: options.loop ?? false,
         pagination: {
             el: root.querySelector('.swiper-pagination'),

@@ -165,7 +165,6 @@ class Elementor_Widget extends \Elementor\Widget_Base
             return;
         }
 
-        // Build ONLY Elementor overrides
         $overrides = [
             'swiper' => [
                 'slidesPerView' => isset($settings['slides_per_view'])
@@ -182,7 +181,6 @@ class Elementor_Widget extends \Elementor\Widget_Base
             ],
         ];
 
-        // Merge with global config
         $config = \SlidePDF\Config::merge($overrides);
 
         echo wp_kses_post(

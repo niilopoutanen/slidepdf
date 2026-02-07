@@ -39,7 +39,7 @@ class UI
             </style>
                 <div class="slidepdf-container" id="<?php echo esc_attr($id); ?>">
                     <div class="slidepdf" data-pdf="<?php echo esc_url($pdf_url); ?>"
-                        data-swiper-options="<?php echo esc_attr($swiper_options); ?>">
+                        data-swiperconfig="<?php echo esc_attr($swiper_options); ?>">
                         <div class="swiper-wrapper">
 
                         </div>
@@ -60,7 +60,7 @@ class UI
                 return ob_get_clean();
     }
 
-    public static function get_single(string $pdf_url)
+    public static function get_single(string $pdf_url, $page_number)
     {
         wp_enqueue_script('pdfjs');
         wp_enqueue_script('slidepdf');
