@@ -92,9 +92,16 @@ function render_shortcode($atts)
         return '';
     }
 
-    $config = Config::get();
-    return UI::get_slider($atts['src'], $config);
+    $config = \SlidePDF\Config::get();
+
+    if (!empty($atts['page'])) {
+        $page = intval($atts['page'] ?? 1);
+        return \SlidePDF\UI::get_single($atts['src'], $page);
+    }
+
+    return \SlidePDF\UI::get_slider($atts['src'], $config);
 }
 
 add_shortcode('slidepdf', '\SlidePDF\render_shortcode');
+
 add_action('admin_init', ['\SlidePDF\Config', 'register']);

@@ -57,8 +57,12 @@ function render_page()
             border-radius: 10px;
             border: 2px solid #dadada;
             padding: 15px;
-            margin-top: 10px;
             cursor: pointer;
+        }
+
+        .label{
+            margin-top: 10px;
+            margin-bottom: 5px;
         }
     </style>
     <div class="header section">
@@ -72,11 +76,17 @@ function render_page()
 
     <div class="section guide">
         <h2>Usage</h2>
-        <code class="shortcode" onclick="copyShortcode()">[slidepdf src="https://example.com/file.pdf"]</code>
+        <span class="label">Load in a slider</span>
+        <code class="shortcode" onclick="copyShortcode(this)">[slidepdf src="https://example.com/file.pdf"]</code>
+
+        <span class="label">Load only a single page</span>
+        <code class="shortcode" onclick="copyShortcode(this)">[slidepdf src="https://example.com/file.pdf" page="2"]</code>
+
         <script>
-            function copyShortcode() {
-                navigator.clipboard.writeText('[slidepdf src="https://example.com/file.pdf"]')
+            function copyShortcode(code) {
+                navigator.clipboard.writeText(code.textContent);
             }
+
         </script>
     </div>
 

@@ -9,7 +9,7 @@
 
 }
 
-.slidepdf .swiper-slide {
+.slidepdf canvas {
     border-radius: var(--slidepdf-slide-radius, 20px);
     overflow: hidden;
     border: 2px solid #84848444;
