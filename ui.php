@@ -9,7 +9,7 @@ class UI
      */
 
 
-    public static function get_slider(string $pdf_url, array $options = []): string
+    public static function get_slider(string $pdf_url, array $config = []): string
     {
         wp_enqueue_script('pdfjs');
         wp_enqueue_script('slidepdf');
@@ -17,7 +17,10 @@ class UI
         wp_enqueue_style('slidepdf');
         wp_enqueue_style('swiper');
 
-        $json_options = esc_attr(wp_json_encode($options));
+        $id = 'slidepdf-' . wp_unique_id();
+        $style = $config['style'] ?? [];
+
+        $swiper_options = esc_attr(wp_json_encode($config['swiper']));
 
         $chevron_svg = file_get_contents(
             plugin_dir_path(__FILE__) . 'assets/chevron.svg'
@@ -26,26 +29,41 @@ class UI
 
         ob_start();
         ?>
-        <div class="slidepdf-container">
-            <div class="slidepdf" data-pdf="<?php echo esc_url($pdf_url); ?>"
-                data-options="<?php echo esc_attr($json_options); ?>">
-                <div class="swiper-wrapper">
+            <style>
+                #<?php echo $id; ?> {
+                    --slidepdf-button-bg: <?php echo esc_html($style['button_bg']); ?>;
+                    --slidepdf-button-icon: <?php echo esc_html($style['button_icon']); ?>;
+                    --slidepdf-button-radius: <?php echo intval($style['button_radius']); ?>px;
+                    --slidepdf-slide-radius: <?php echo intval($style['slide_radius']); ?>px;
+                }
+            </style>
+                <div class="slidepdf-container" id="<?php echo esc_attr($id); ?>">
+                    <div class="slidepdf" data-pdf="<?php echo esc_url($pdf_url); ?>"
+                        data-swiper-options="<?php echo esc_attr($swiper_options); ?>">
+                        <div class="swiper-wrapper">
 
-                </div>
+                        </div>
 
-                <div class="controls">
-                    <button class="previous navigation">
-                        <?php echo $chevron_svg; ?>
-                    </button>
-                    <button class="next navigation">
-                        <?php echo $chevron_svg; ?>
-                    </button>
-                    <div class="swiper-pagination"></div>
-                    <a class="download" href="<?php echo esc_url($pdf_url); ?>" download>Download</a>
+                        <div class="controls">
+                            <button class="previous navigation">
+                                <?php echo $chevron_svg; ?>
+                            </button>
+                            <button class="next navigation">
+                                <?php echo $chevron_svg; ?>
+                            </button>
+                            <div class="swiper-pagination"></div>
+                            <a class="download" href="<?php echo esc_url($pdf_url); ?>" download>Download</a>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-        <?php
-        return ob_get_clean();
+                <?php
+                return ob_get_clean();
+    }
+
+    public static function get_single(string $pdf_url)
+    {
+        wp_enqueue_script('pdfjs');
+        wp_enqueue_script('slidepdf');
+        wp_enqueue_style('slidepdf');
     }
 }

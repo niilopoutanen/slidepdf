@@ -19,6 +19,7 @@ if (!defined('ABSPATH')) {
 
 require_once plugin_dir_path(__FILE__) . 'ui.php';
 require_once plugin_dir_path(__FILE__) . 'admin-page.php';
+require_once plugin_dir_path(__FILE__) . 'config.php';
 function register_scripts()
 {
     wp_register_script(
@@ -91,7 +92,9 @@ function render_shortcode($atts)
         return '';
     }
 
-    return UI::get_slider($atts['src']);
+    $config = Config::get();
+    return UI::get_slider($atts['src'], $config);
 }
 
 add_shortcode('slidepdf', '\SlidePDF\render_shortcode');
+add_action('admin_init', ['\SlidePDF\Config', 'register']);

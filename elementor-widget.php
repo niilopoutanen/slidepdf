@@ -161,17 +161,38 @@ class Elementor_Widget extends \Elementor\Widget_Base
             $pdf_url = $settings['pdf_url'] ?? '';
         }
 
-        $options = [
-            'slides_per_view' => (int) ($settings['slides_per_view'] ?? 1),
-            'space_between' => (int) ($settings['space_between'] ?? 10),
-            'loop' => !empty($settings['loop']),
+        if (!$pdf_url) {
+            return;
+        }
+
+        // Build ONLY Elementor overrides
+        $overrides = [
+            'swiper' => [
+                'slidesPerView' => isset($settings['slides_per_view'])
+                    ? (int) $settings['slides_per_view']
+                    : null,
+
+                'spaceBetween' => isset($settings['space_between'])
+                    ? (int) $settings['space_between']
+                    : null,
+
+                'loop' => isset($settings['loop'])
+                    ? $settings['loop'] === 'yes'
+                    : null,
+            ],
         ];
 
-        if ($pdf_url) {
-            echo wp_kses_post(UI::get_slider($pdf_url, $options));
+        // Merge with global config
+        $config = \SlidePDF\Config::merge($overrides);
 
-        }
+        echo wp_kses_post(
+            UI::get_slider(
+                $pdf_url,
+                $config
+            )
+        );
     }
+
 
 
 }
