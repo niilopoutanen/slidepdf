@@ -16,9 +16,9 @@ class UI
         wp_enqueue_script('swiper');
         wp_enqueue_style('slidepdf');
         wp_enqueue_style('swiper');
+        wp_enqueue_style('swiper-pagination');
 
         $id = 'slidepdf-' . wp_unique_id();
-        $style = $config['style'] ?? [];
 
         $swiper_options = esc_attr(wp_json_encode($config['swiper']));
 
@@ -29,14 +29,7 @@ class UI
 
         ob_start();
         ?>
-        <style>
-            #<?php echo $id; ?> {
-                --slidepdf-button-bg: <?php echo esc_html($style['button_bg']); ?>;
-                --slidepdf-button-icon: <?php echo esc_html($style['button_icon']); ?>;
-                --slidepdf-button-radius: <?php echo intval($style['button_radius']); ?>px;
-                --slidepdf-slide-radius: <?php echo intval($style['slide_radius']); ?>px;
-            }
-        </style>
+        <?php echo UI::get_css($id, $config); ?>
         <div class="slidepdf-container" id="<?php echo esc_attr($id); ?>">
             <div class="slidepdf" data-pdf="<?php echo esc_url($pdf_url); ?>"
                 data-swiperconfig="<?php echo esc_attr($swiper_options); ?>">
@@ -70,6 +63,8 @@ class UI
 
         ob_start();
         ?>
+        <?php echo UI::get_css($id, Config::get()); ?>
+
         <div class="slidepdf single" id="<?php echo esc_attr($id); ?>" data-pdf="<?php echo esc_url($pdf_url); ?>"
             data-single="true" data-page="<?php echo intval($page_number); ?>">
             <canvas></canvas>
@@ -81,5 +76,42 @@ class UI
 
         return ob_get_clean();
     }
+
+
+    private static function get_css(string $target_id, array $config): void
+    {
+        $style = $config['style'] ?? [];
+        ?>
+        <style>
+            #<?php echo esc_attr($target_id); ?> {
+                --slidepdf-width: <?php echo esc_html($style['width']); ?>;
+                --slidepdf-height: <?php echo esc_html($style['height']); ?>;
+
+                --slidepdf-button-bg: <?php echo esc_html($style['button_bg']); ?>;
+                --slidepdf-button-icon: <?php echo esc_html($style['button_icon']); ?>;
+                --slidepdf-button-hover-bg: <?php echo esc_html($style['button_hover_bg']); ?>;
+                --slidepdf-button-hover-icon: <?php echo esc_html($style['button_hover_icon']); ?>;
+                --slidepdf-button-size: <?php echo intval($style['button_size']); ?>px;
+                --slidepdf-button-radius: <?php echo intval($style['button_radius']); ?>px;
+                --slidepdf-button-border-width: <?php echo intval($style['button_border_width']); ?>px;
+                --slidepdf-button-border-color: <?php echo esc_html($style['button_border_color']); ?>;
+
+                --slidepdf-slide-bg: <?php echo esc_html($style['slide_bg']); ?>;
+                --slidepdf-slide-radius: <?php echo intval($style['slide_radius']); ?>px;
+                --slidepdf-slide-border-width: <?php echo intval($style['slide_border_width']); ?>px;
+                --slidepdf-slide-border-color: <?php echo esc_html($style['slide_border_color']); ?>;
+                --slidepdf-slide-shadow: <?php echo esc_html($style['slide_shadow']); ?>;
+
+                --slidepdf-pagination-color: <?php echo esc_html($style['pagination_color']); ?>;
+                --slidepdf-pagination-active: <?php echo esc_html($style['pagination_active']); ?>;
+                --slidepdf-pagination-size: <?php echo intval($style['pagination_size']); ?>px;
+
+                --slidepdf-controls-gap: <?php echo intval($style['controls_gap']); ?>px;
+                --slidepdf-controls-opacity: <?php echo floatval($style['controls_opacity']); ?>;
+            }
+        </style>
+        <?php
+    }
+
 
 }

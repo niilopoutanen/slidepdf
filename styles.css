@@ -1,51 +1,60 @@
 .slidepdf-container {
-
+    width: var(--slidepdf-width, 100%);
+    height: var(--slidepdf-height, 100%);
     overflow: hidden;
     --swiper-navigation-size: 20px;
+    --swiper-pagination-bullet-size: var(--slidepdf-pagination-size, 8px);
 }
 
 .slidepdf .swiper-wrapper {
     min-height: 200px;
-
 }
 
 .slidepdf canvas {
     border-radius: var(--slidepdf-slide-radius, 20px);
     overflow: hidden;
-    border: 2px solid #84848444;
+    border-style: solid;
+    border-width: var(--slidepdf-slide-border-width, 2px);
+    border-color: var(--slidepdf-slide-border-color, #84848444);
     box-sizing: border-box;
 }
 
 .slidepdf .controls {
     display: flex;
     margin-top: 10px;
-    gap: 10px;
+    gap: var(--slidepdf-controls-gap, 10px);
+    opacity: var(--slidepdf-controls-opacity, 1);
     align-items: center;
 }
 
 .slidepdf .controls .download {
-    background-color: var(--slidepdf-button-bg, #e6e6e6);
     padding: 10px 20px;
     font-size: 15px;
-    border-radius: 1000px;
-    height: 40px;
+    height: var(--slidepdf-button-size, 40px);
     box-sizing: border-box;
     text-decoration: none;
     margin-left: auto;
     font-weight: 500;
-    transition: transform 0.2s ease, opacity 0.2s;
+    transition:
+        transform 0.2s ease,
+        opacity 0.2s;
+}
+.slidepdf .controls .download,
+.slidepdf .navigation {
+    background-color: var(--slidepdf-button-bg, #e6e6e6);
+    border-style: solid;
+    border-radius: var(--slidepdf-button-radius, 1000px);
+    border-width: var(--slidepdf-button-border-width, 0px);
     color: var(--slidepdf-button-icon, #000000);
 }
 
 .slidepdf .navigation {
     position: relative !important;
-    background-color: var(--slidepdf-button-bg, #e6e6e6);
     padding: 10px;
-    border-radius: var(--slidepdf-button-radius, 1000px);
     outline: none;
     border: none;
-    width: 40px !important;
-    height: 40px !important;
+    width: var(--slidepdf-button-size, 40px);
+    height: var(--slidepdf-button-size, 40px);
     box-sizing: border-box;
 
     display: flex;
@@ -59,7 +68,9 @@
     margin: 0 !important;
     aspect-ratio: 1;
 
-    transition: transform 0.2s ease, opacity 0.2s;
+    transition:
+        transform 0.2s ease,
+        opacity 0.2s;
 }
 
 .slidepdf .navigation.swiper-button-disabled {
@@ -88,11 +99,12 @@
 .slidepdf .swiper-pagination {
     position: relative !important;
     text-align: start !important;
-
+    display: flex;
     top: unset !important;
     bottom: unset !important;
     right: unset !important;
     left: unset !important;
+    outline: none;
 }
 
 .slidepdf canvas {

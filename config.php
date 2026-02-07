@@ -9,20 +9,46 @@ final class Config
     {
         return [
             'style' => [
+                'width' => '100%',
+                'height' => '100%',
+
                 'button_bg' => '#e6e6e6',
                 'button_icon' => '#121212',
                 'button_radius' => 1000,
+                'button_size' => 40,
+                'button_border_width' => 0,
+                'button_border_color' => 'transparent',
+                'button_hover_bg' => '#dcdcdc',
+                'button_hover_icon' => '#000000',
+
                 'slide_radius' => 20,
                 'slide_border_width' => 2,
-                'slide_border_color' => '#84848444'
+                'slide_border_color' => '#84848444',
+                'slide_bg' => '#ffffff',
+
+                'pagination_color' => '#121212',
+                'pagination_active' => '#000000',
+                'pagination_size' => 8,
+
+                'controls_gap' => 10,
+                'controls_opacity' => 1,
             ],
+
             'swiper' => [
                 'slidesPerView' => 1,
                 'spaceBetween' => 10,
                 'loop' => false,
+                'speed' => 300,
+                'centeredSlides' => false,
+                'autoHeight' => true,
             ],
+
+            'show_controls' => true,
+            'show_pagination' => true,
+            'show_download' => true,
         ];
     }
+
 
     public static function get(): array
     {
