@@ -80,7 +80,11 @@ class UI
 
     private static function get_css(string $target_id, array $config): void
     {
-        $style = $config['style'] ?? [];
+        $defaults = \SlidePDF\Config::defaults()['style'];
+        $style = array_replace($defaults, $config['style'] ?? []);
+        if (empty($style)) {
+            return;
+        }
         ?>
         <style>
             #<?php echo esc_attr($target_id); ?> {

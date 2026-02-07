@@ -67,7 +67,7 @@ class Elementor_Widget extends \Elementor\Widget_Base
                 'label_on' => esc_html__('Yes', 'slidepdf'),
                 'label_off' => esc_html__('No', 'slidepdf'),
                 'return_value' => 'yes',
-                'default' => '',
+                'default' => 'yes',
             ]
         );
 
@@ -110,25 +110,58 @@ class Elementor_Widget extends \Elementor\Widget_Base
             ]
         );
 
-        $this->add_control(
+        $this->add_responsive_control(
             'style_width',
             [
                 'label' => esc_html__('Width', 'slidepdf'),
-                'type' => \Elementor\Controls_Manager::TEXT,
-                'placeholder' => '100%',
+                'type' => \Elementor\Controls_Manager::SLIDER,
+                'size_units' => ['%', 'px', 'vw'],
+                'range' => [
+                    '%' => [
+                        'min' => 10,
+                        'max' => 100,
+                    ],
+                    'px' => [
+                        'min' => 200,
+                        'max' => 2000,
+                    ],
+                ],
+                'default' => [
+                    'size' => 100,
+                    'unit' => '%',
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .slidepdf-container' => 'width: {{SIZE}}{{UNIT}};',
+                ],
             ]
         );
 
-        $this->add_control(
+
+        $this->add_responsive_control(
             'style_height',
             [
                 'label' => esc_html__('Height', 'slidepdf'),
-                'type' => \Elementor\Controls_Manager::TEXT,
-                'placeholder' => '100%',
+                'type' => \Elementor\Controls_Manager::SLIDER,
+                'size_units' => ['px', 'vh'],
+                'range' => [
+                    'px' => [
+                        'min' => 200,
+                        'max' => 2000,
+                    ],
+                    'vh' => [
+                        'min' => 20,
+                        'max' => 100,
+                    ],
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .slidepdf-container' => 'height: {{SIZE}}{{UNIT}};',
+                ],
             ]
         );
 
+
         $this->end_controls_section();
+
         $this->start_controls_section(
             'section_style_slides',
             [
@@ -142,34 +175,64 @@ class Elementor_Widget extends \Elementor\Widget_Base
             [
                 'label' => esc_html__('Background', 'slidepdf'),
                 'type' => \Elementor\Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .slidepdf canvas' => 'background-color: {{VALUE}};',
+                ],
             ]
         );
 
-        $this->add_control(
+
+        $this->add_responsive_control(
             'slide_radius',
             [
-                'label' => esc_html__('Border radius (px)', 'slidepdf'),
-                'type' => \Elementor\Controls_Manager::NUMBER,
-                'min' => 0,
+                'label' => esc_html__('Border Radius', 'slidepdf'),
+                'type' => \Elementor\Controls_Manager::SLIDER,
+                'size_units' => ['px'],
+                'range' => [
+                    'px' => [
+                        'min' => 0,
+                        'max' => 1000,
+                    ],
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .slidepdf canvas' => 'border-radius: {{SIZE}}{{UNIT}};',
+                ],
             ]
         );
 
-        $this->add_control(
+
+        $this->add_responsive_control(
             'slide_border_width',
             [
-                'label' => esc_html__('Border width (px)', 'slidepdf'),
-                'type' => \Elementor\Controls_Manager::NUMBER,
-                'min' => 0,
+                'label' => esc_html__('Border Width', 'slidepdf'),
+                'type' => \Elementor\Controls_Manager::SLIDER,
+                'size_units' => ['px'],
+                'range' => [
+                    'px' => [
+                        'min' => 0,
+                        'max' => 20,
+                    ],
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .slidepdf canvas' => 'border-width: {{SIZE}}{{UNIT}}; border-style: solid;',
+                ],
             ]
         );
 
         $this->add_control(
             'slide_border_color',
             [
-                'label' => esc_html__('Border color', 'slidepdf'),
+                'label' => esc_html__('Border Color', 'slidepdf'),
                 'type' => \Elementor\Controls_Manager::COLOR,
+                'selectors' => [
+                    '{{WRAPPER}} .slidepdf canvas' => 'border-color: {{VALUE}};',
+                ],
+                'condition' => [
+                    'slide_border_width!' => '',
+                ],
             ]
         );
+
 
 
         $this->end_controls_section();
