@@ -3,7 +3,10 @@
     height: var(--slidepdf-height, 100%);
     overflow: hidden;
     --swiper-navigation-size: 20px;
-    --swiper-pagination-bullet-size: var(--slidepdf-pagination-size, 8px);
+    --swiper-pagination-bullet-size: var(--slidepdf-pagination_size, 8px);
+    --swiper-pagination-color: var(--slidepdf-pagination_active);
+    --swiper-pagination-bullet-inactive-color: var(--slidepdf-pagination_color);
+    --swiper-pagination-bullet-inactive-opacity: 1;
 }
 
 .slidepdf .swiper-wrapper {
@@ -11,11 +14,11 @@
 }
 
 .slidepdf .page {
-    border-radius: var(--slidepdf-slide-radius, 20px);
+    border-radius: var(--slidepdf-slide_radius, 20px);
     overflow: hidden;
     border-style: solid;
-    border-width: var(--slidepdf-slide-border-width, 2px);
-    border-color: var(--slidepdf-slide-border-color, #84848444);
+    border-width: var(--slidepdf-slide_border_width, 2px);
+    border-color: var(--slidepdf-slide_border_color, #84848444);
     box-sizing: border-box;
     height: 100%;
     width: 100%;
@@ -24,15 +27,15 @@
 .slidepdf .controls {
     display: flex;
     margin-top: 10px;
-    gap: var(--slidepdf-controls-gap, 10px);
-    opacity: var(--slidepdf-controls-opacity, 1);
+    gap: var(--slidepdf-controls_gap, 10px);
+    opacity: var(--slidepdf-controls_opacity, 1);
     align-items: center;
 }
 
 .slidepdf .controls .download {
     padding: 10px 20px;
     font-size: 15px;
-    height: var(--slidepdf-button-size, 40px);
+    height: var(--slidepdf-button_size, 40px);
     box-sizing: border-box;
     text-decoration: none;
     margin-left: auto;
@@ -41,27 +44,16 @@
         transform 0.2s ease,
         opacity 0.2s;
 }
-.slidepdf .controls .download,
-.slidepdf .navigation {
-    background-color: var(--slidepdf-button-bg, #e6e6e6);
-    border-style: solid;
-    border-radius: var(--slidepdf-button-radius, 1000px);
-    border-width: var(--slidepdf-button-border-width, 0px);
-    color: var(--slidepdf-button-icon, #000000);
-}
+
 
 .slidepdf .navigation {
     position: relative !important;
     padding: 10px;
     outline: none;
     border: none;
-    width: var(--slidepdf-button-size, 40px);
-    height: var(--slidepdf-button-size, 40px);
+    width: var(--slidepdf-button_size, 40px);
+    height: var(--slidepdf-button_size, 40px);
     box-sizing: border-box;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
 
     left: unset !important;
     top: unset !important;
@@ -87,11 +79,25 @@
 .slidepdf .navigation svg {
     width: 20px !important;
     height: 20px !important;
-    fill: var(--slidepdf-button-icon, #000000) !important;
+    fill: var(--slidepdf-button_icon, #000000) !important;
 }
 
 .slidepdf .navigation svg path {
-    fill: var(--slidepdf-button-icon, #000000) !important;
+    fill: var(--slidepdf-button_icon, #000000) !important;
+}
+
+.slidepdf .controls .download,
+.slidepdf .navigation {
+    background-color: var(--slidepdf-button_bg, #e6e6e6);
+    border-style: solid;
+    border-radius: var(--slidepdf-button_radius, 1000px);
+    border-width: var(--slidepdf-button_border_width, 0px);
+    border-color: var(--slidepdf-button_border_color, none);
+    color: var(--slidepdf-button_icon, #000000);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .slidepdf .next svg {

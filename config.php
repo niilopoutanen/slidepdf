@@ -1,60 +1,126 @@
 <?php
 namespace SlidePDF;
+final class ConfigItem
+{
+    public string $id;
+    public string $name;
+    public $value;
+    public ?string $unit;
+
+    public function __construct(string $id, string $name, $value, ?string $unit = null)
+    {
+        $this->id = $id;
+        $this->name = $name;
+        $this->value = $value;
+        $this->unit = $unit;
+    }
+
+    public function toCss(): string
+    {
+        return $this->unit ? "{$this->value}{$this->unit}" : (string) $this->value;
+    }
+
+    public function inputType(): string
+    {
+        $idLower = strtolower($this->id);
+
+        if (
+            strpos($idLower, 'color') !== false ||
+            strpos($idLower, 'bg') !== false ||
+            (is_string($this->value) && preg_match('/^#(?:[0-9a-fA-F]{3}){1,2}$/', $this->value))
+        ) {
+            return 'color';
+        }
+
+        if (is_numeric($this->value) && $this->unit === 'px') {
+            return 'number';
+        }
+
+        if (is_bool($this->value)) {
+            return 'checkbox';
+        }
+
+        return 'text';
+    }
+
+
+    public function inputAttributes(): string
+    {
+        if ($this->inputType() === 'number') {
+            return 'step="1" min="0"';
+        }
+
+        return '';
+    }
+}
 
 final class Config
 {
     public const OPTION_KEY = 'slidepdf_config';
 
+    /** @return array<string, ConfigItem[]> */
     public static function defaults(): array
     {
         return [
             'style' => [
-                'width' => '100%',
-                'height' => '100%',
+                new ConfigItem('width', __('Width', 'slidepdf'), '100%'),
+                new ConfigItem('height', __('Height', 'slidepdf'), '100%'),
 
-                'button_bg' => '#e6e6e6',
-                'button_icon' => '#121212',
-                'button_radius' => 1000,
-                'button_size' => 40,
-                'button_border_width' => 0,
-                'button_border_color' => 'transparent',
-                'button_hover_bg' => '#dcdcdc',
-                'button_hover_icon' => '#000000',
+                new ConfigItem('button_bg', __('Button background color', 'slidepdf'), '#e6e6e6'),
+                new ConfigItem('button_icon', __('Button foreground color', 'slidepdf'), '#121212'),
+                new ConfigItem('button_radius', __('Button border radius', 'slidepdf'), 1000, 'px'),
+                new ConfigItem('button_size', __('Button size', 'slidepdf'), 40, 'px'),
+                new ConfigItem('button_border_width', __('Button border width', 'slidepdf'), 0, 'px'),
+                new ConfigItem('button_border_color', __('Button border color', 'slidepdf'), 'transparent'),
+                new ConfigItem('button_hover_bg', __('Button background color on hover', 'slidepdf'), '#dcdcdc'),
+                new ConfigItem('button_hover_icon', __('Button foreground color on hover', 'slidepdf'), '#000000'),
 
-                'slide_radius' => 20,
-                'slide_border_width' => 2,
-                'slide_border_color' => '#e3e3e3',
-                'slide_bg' => '#ffffff',
+                new ConfigItem('slide_radius', __('Slide border radius', 'slidepdf'), 20, 'px'),
+                new ConfigItem('slide_border_width', __('Slide border width', 'slidepdf'), 2, 'px'),
+                new ConfigItem('slide_border_color', __('Slide border color', 'slidepdf'), '#e3e3e3'),
+                new ConfigItem('slide_bg', __('Slide background color', 'slidepdf'), '#ffffff'),
 
-                'pagination_color' => '#121212',
-                'pagination_active' => '#000000',
-                'pagination_size' => 8,
+                new ConfigItem('pagination_color', __('Pagination color', 'slidepdf'), '#e6e6e6'),
+                new ConfigItem('pagination_active', __('Active pagination color', 'slidepdf'), '#2c3aff'),
+                new ConfigItem('pagination_size', __('Pagination size', 'slidepdf'), 8, 'px'),
 
-                'controls_gap' => 10,
-                'controls_opacity' => 1,
+                new ConfigItem('controls_gap', __('Controls gap', 'slidepdf'), 10, 'px'),
+                new ConfigItem('controls_opacity', __('Controls opacity', 'slidepdf'), 1),
             ],
 
             'swiper' => [
-                'slidesPerView' => 1,
-                'spaceBetween' => 10,
-                'loop' => false,
-                'speed' => 300,
-                'centeredSlides' => false,
-                'autoHeight' => true,
+                new ConfigItem('slidesPerView', __('Slides per view', 'slidepdf'), 1),
+                new ConfigItem('spaceBetween', __('Space between slides', 'slidepdf'), 10),
+                new ConfigItem('loop', __('Loop slides', 'slidepdf'), false),
+                new ConfigItem('speed', __('Transition speed', 'slidepdf'), 300),
+                new ConfigItem('centeredSlides', __('Centered slides', 'slidepdf'), false),
+                new ConfigItem('autoHeight', __('Auto height', 'slidepdf'), true),
             ],
 
-            'show_controls' => true,
-            'show_pagination' => true,
-            'show_download' => true,
+            'features' => [
+                new ConfigItem('show_controls', __('Show controls', 'slidepdf'), true),
+                new ConfigItem('show_pagination', __('Show pagination', 'slidepdf'), true),
+                new ConfigItem('show_download', __('Show download button', 'slidepdf'), true),
+            ],
         ];
+
     }
 
 
     public static function get(): array
     {
-        $saved = get_option('slidepdf_config', []);
+        $stored = get_option(self::OPTION_KEY, []);
+        $defaults = self::defaults();
 
-        return self::merge(self::defaults(), $saved);
+        foreach ($defaults as $section => $items) {
+            foreach ($items as $item) {
+                if (isset($stored[$section][$item->id])) {
+                    $item->value = $stored[$section][$item->id];
+                }
+            }
+        }
+
+        return $defaults;
     }
 
 
@@ -71,36 +137,26 @@ final class Config
         return $defaults;
     }
 
+    public static function toCss(array $config): string
+    {
+        $lines = [];
+        foreach ($config['style'] as $item) {
+            $lines[] = "--slidepdf-{$item->id}: {$item->toCss()};";
+        }
+        return implode("\n", $lines);
+    }
 
     public static function sanitize(array $input): array
     {
-        $defaults = self::defaults();
-        $saved = get_option(self::OPTION_KEY, []);
-
-        $clean = self::merge($defaults, $saved);
-        $clean = self::merge($clean, $input);
-
-        $clean['style']['button_bg'] = sanitize_hex_color($clean['style']['button_bg']);
-        $clean['style']['button_icon'] = sanitize_hex_color($clean['style']['button_icon']);
-        $clean['style']['width'] = sanitize_text_field($clean['style']['width']);
-        $clean['style']['height'] = sanitize_text_field($clean['style']['height']);
-
-        $clean['swiper']['slidesPerView'] = absint($clean['swiper']['slidesPerView']);
-        $clean['swiper']['loop'] = !empty($clean['swiper']['loop']);
-
-        $clean['show_controls'] = !empty($input['show_controls']);
-        $clean['show_pagination'] = !empty($input['show_pagination']);
-        $clean['show_download'] = !empty($input['show_download']);
-
-
-        return $clean;
+        return $input;
     }
+
 
 
     public static function register(): void
     {
         register_setting(
-            'slidepdf_settings',
+            Config::OPTION_KEY,
             self::OPTION_KEY,
             [
                 'type' => 'array',
@@ -110,3 +166,6 @@ final class Config
         );
     }
 }
+
+
+

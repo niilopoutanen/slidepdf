@@ -8,8 +8,7 @@ add_action("admin_menu", function () {
         "SlidePDF",
         "install_plugins",
         "slidepdf",
-        '\SlidePDF\render_page',
-        ""
+        '\SlidePDF\render_page'
     );
 });
 
@@ -17,13 +16,13 @@ function render_page()
 {
     if (!empty($_POST['slidepdf_reset']) && check_admin_referer('slidepdf_reset_defaults')) {
         delete_option(Config::OPTION_KEY);
-        $options = Config::defaults();
+        $config = Config::defaults();
         echo '<div class="updated notice"><p>Settings have been reset to defaults.</p></div>';
     } else {
-        $options = Config::get();
+        $config = Config::get();
     }
 
-    $options = Config::get(); ?>
+    $config = Config::get(); ?>
 
     <style>
         .section.header {
@@ -55,7 +54,25 @@ function render_page()
         .header p {
             font-size: 20px;
         }
+        .control{
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            align-items: center;
+        }
+        
+        .control label{
+            width: 100%;
+        }
+        .control input{
+            background-color: #ffffff;
+            border: 2px solid #dadada;
+            border-radius: 10px;
+        }
 
+        .control input[type="text"]{
+            padding: 5px 10px;
+        }
         .section {
             padding: 50px;
             box-sizing: border-box;
@@ -91,13 +108,13 @@ function render_page()
         <h2>Usage</h2>
         <span class="label">Load in a slider</span>
         <code class="shortcode" onclick="copyShortcode(this)">
-            [slidepdf src="https://example.com/file.pdf"]
-        </code>
+                    [slidepdf src="https://example.com/file.pdf"]
+                </code>
 
         <span class="label">Load only a single page</span>
         <code class="shortcode" onclick="copyShortcode(this)">
-            [slidepdf src="https://example.com/file.pdf" page="2"]
-        </code>
+                    [slidepdf src="https://example.com/file.pdf" page="2"]
+                </code>
 
         <script>
             function copyShortcode(code) {
@@ -107,162 +124,44 @@ function render_page()
     </div>
 
     <form method="post" action="options.php">
-        <?php settings_fields('slidepdf_settings'); ?>
+        <?php settings_fields(Config::OPTION_KEY); ?>
 
-        <div class="section style">
-            <h2>Style settings</h2>
+        <?php foreach ($config as $sectionName => $items): ?>
+            <div class="section <?php echo esc_attr($sectionName); ?>">
+                <h2><?php echo esc_html(ucfirst($sectionName)); ?></h2>
 
-            <h3>Layout</h3>
-            <p>Width</p>
-            <input type="text" name="slidepdf_config[style][width]"
-                   value="<?php echo esc_attr($options['style']['width']); ?>">
+                <?php foreach ($items as $item): ?>
+                    <?php
+                    $type = $item->inputType();
+                    $attrs = $item->inputAttributes();
+                    $value = $type === 'checkbox' ? 1 : $item->value;
+                    $checked = $type === 'checkbox' && $item->value ? 'checked' : '';
+                    $label = esc_html($item->name);
+                    $id = esc_attr($sectionName . '_' . $item->id);
+                    $name = esc_attr("slidepdf_config[{$sectionName}][{$item->id}]");
+                    ?>
 
-            <p>Height</p>
-            <input type="text" name="slidepdf_config[style][height]"
-                   value="<?php echo esc_attr($options['style']['height']); ?>">
+                    <div class="control">
+                        <label class="label" for="<?php echo $id; ?>">
+                            <?php echo $label; ?>
+                        </label>
 
-            <h3>Buttons</h3>
-            <p>Button background</p>
-            <input type="color" name="slidepdf_config[style][button_bg]"
-                   value="<?php echo esc_attr($options['style']['button_bg']); ?>">
+                        <?php if ($type === 'checkbox'): ?>
+                            <input type="checkbox" id="<?php echo $id; ?>" name="<?php echo $name; ?>" value="1" <?php echo $checked; ?>>
+                        <?php else: ?>
+                            <input type="<?php echo esc_attr($type); ?>" id="<?php echo $id; ?>" name="<?php echo $name; ?>"
+                                value="<?php echo esc_attr($value); ?>" <?php echo $attrs; ?>>
+                            <?php if ($item->unit): ?>
+                                <span><?php echo esc_html($item->unit); ?></span>
+                            <?php endif; ?>
+                        <?php endif; ?>
+                    </div>
 
-            <p>Button icon color</p>
-            <input type="color" name="slidepdf_config[style][button_icon]"
-                   value="<?php echo esc_attr($options['style']['button_icon']); ?>">
+                <?php endforeach; ?>
+            </div>
+        <?php endforeach; ?>
 
-            <p>Button hover background</p>
-            <input type="color" name="slidepdf_config[style][button_hover_bg]"
-                   value="<?php echo esc_attr($options['style']['button_hover_bg']); ?>">
-
-            <p>Button hover icon</p>
-            <input type="color" name="slidepdf_config[style][button_hover_icon]"
-                   value="<?php echo esc_attr($options['style']['button_hover_icon']); ?>">
-
-            <p>Button size (px)</p>
-            <input type="number" min="0" name="slidepdf_config[style][button_size]"
-                   value="<?php echo esc_attr($options['style']['button_size']); ?>">
-
-            <p>Button border radius (px)</p>
-            <input type="number" min="0" name="slidepdf_config[style][button_radius]"
-                   value="<?php echo esc_attr($options['style']['button_radius']); ?>">
-
-            <p>Button border width (px)</p>
-            <input type="number" min="0" name="slidepdf_config[style][button_border_width]"
-                   value="<?php echo esc_attr($options['style']['button_border_width']); ?>">
-
-            <p>Button border color</p>
-            <input type="color" name="slidepdf_config[style][button_border_color]"
-                   value="<?php echo esc_attr($options['style']['button_border_color']); ?>">
-
-            <h3>Slides</h3>
-            <p>Slide background</p>
-            <input type="color" name="slidepdf_config[style][slide_bg]"
-                   value="<?php echo esc_attr($options['style']['slide_bg']); ?>">
-
-            <p>Slide border radius (px)</p>
-            <input type="number" min="0" name="slidepdf_config[style][slide_radius]"
-                   value="<?php echo esc_attr($options['style']['slide_radius']); ?>">
-
-            <p>Slide border width (px)</p>
-            <input type="number" min="0" name="slidepdf_config[style][slide_border_width]"
-                   value="<?php echo esc_attr($options['style']['slide_border_width']); ?>">
-
-            <p>Slide border color</p>
-            <input type="color" name="slidepdf_config[style][slide_border_color]"
-                   value="<?php echo esc_attr($options['style']['slide_border_color']); ?>">
-
-            <h3>Controls</h3>
-            <p>Controls gap (px)</p>
-            <input type="number" min="0" name="slidepdf_config[style][controls_gap]"
-                   value="<?php echo esc_attr($options['style']['controls_gap']); ?>">
-
-            <p>Controls opacity</p>
-            <input type="number" min="0" max="1" step="0.1" name="slidepdf_config[style][controls_opacity]"
-                   value="<?php echo esc_attr($options['style']['controls_opacity']); ?>">
-
-            <h3>Pagination</h3>
-            <p>Pagination color</p>
-            <input type="color" name="slidepdf_config[style][pagination_color]"
-                   value="<?php echo esc_attr($options['style']['pagination_color']); ?>">
-
-            <p>Active pagination color</p>
-            <input type="color" name="slidepdf_config[style][pagination_active]"
-                   value="<?php echo esc_attr($options['style']['pagination_active']); ?>">
-
-            <p>Pagination size (px)</p>
-            <input type="number" min="1" name="slidepdf_config[style][pagination_size]"
-                   value="<?php echo esc_attr($options['style']['pagination_size']); ?>">
-        </div>
-
-        <div class="section swiper">
-            <h2>Swiper settings</h2>
-
-            <p>Slides per view</p>
-            <input type="number" min="1" max="10" name="slidepdf_config[swiper][slidesPerView]"
-                   value="<?php echo esc_attr($options['swiper']['slidesPerView']); ?>">
-
-            <p>Space between slides (px)</p>
-            <input type="number" min="0" name="slidepdf_config[swiper][spaceBetween]"
-                   value="<?php echo esc_attr($options['swiper']['spaceBetween']); ?>">
-
-            <p>Transition speed (ms)</p>
-            <input type="number" min="0" name="slidepdf_config[swiper][speed]"
-                   value="<?php echo esc_attr($options['swiper']['speed']); ?>">
-
-            <p>
-                <label>
-                    <input type="checkbox" name="slidepdf_config[swiper][loop]" value="1"
-                        <?php checked($options['swiper']['loop']); ?>>
-                    Loop slides
-                </label>
-            </p>
-
-            <p>
-                <label>
-                    <input type="checkbox" name="slidepdf_config[swiper][centeredSlides]" value="1"
-                        <?php checked($options['swiper']['centeredSlides']); ?>>
-                    Center slides
-                </label>
-            </p>
-
-            <p>
-                <label>
-                    <input type="checkbox" name="slidepdf_config[swiper][autoHeight]" value="1"
-                        <?php checked($options['swiper']['autoHeight']); ?>>
-                    Auto height
-                </label>
-            </p>
-        </div>
-
-        <div class="section features">
-            <h2>Features</h2>
-
-            <p>
-                <label>
-                    <input type="checkbox" name="slidepdf_config[show_controls]" value="1"
-                        <?php checked($options['show_controls']); ?>>
-                    Show controls
-                </label>
-            </p>
-
-            <p>
-                <label>
-                    <input type="checkbox" name="slidepdf_config[show_pagination]" value="1"
-                        <?php checked($options['show_pagination']); ?>>
-                    Show pagination
-                </label>
-            </p>
-
-            <p>
-                <label>
-                    <input type="checkbox" name="slidepdf_config[show_download]" value="1"
-                        <?php checked($options['show_download']); ?>>
-                    Show download button
-                </label>
-            </p>
-        </div>
-
-        <?php submit_button('Save settings'); ?>
+        <?php submit_button(__('Save Settings', 'slidepdf')); ?>
     </form>
 
     <form method="post" action="">
@@ -272,5 +171,5 @@ function render_page()
     </form>
 
 
-<?php
+    <?php
 }
