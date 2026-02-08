@@ -11,13 +11,6 @@ class UI
 
     public static function get_slider(string $pdf_url, array $config = []): string
     {
-        wp_enqueue_script('pdfjs');
-        wp_enqueue_script('slidepdf');
-        wp_enqueue_script('swiper');
-        wp_enqueue_style('slidepdf');
-        wp_enqueue_style('swiper');
-        wp_enqueue_style('swiper-pagination');
-
         $id = 'slidepdf-' . wp_unique_id();
 
         $swiper_options = esc_attr(wp_json_encode($config['swiper']));
@@ -54,10 +47,6 @@ class UI
 
     public static function get_single(string $pdf_url, int $page_number = 1): string
     {
-        wp_enqueue_script('pdfjs');
-        wp_enqueue_script('slidepdf');
-        wp_enqueue_style('slidepdf');
-
         $id = 'slidepdf-single-' . wp_unique_id();
         $config = Config::get();
         ob_start();

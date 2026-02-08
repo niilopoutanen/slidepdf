@@ -37,7 +37,7 @@ class Elementor_Widget extends \Elementor\Widget_Base
 
     public function get_style_depends(): array
     {
-        return ['slidepdf', 'swiper'];
+        return ['slidepdf', 'swiper', 'swiper-pagination'];
     }
 
     public function has_widget_inner_wrapper(): bool
@@ -131,7 +131,7 @@ class Elementor_Widget extends \Elementor\Widget_Base
                     'unit' => '%',
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} .slidepdf-container' => 'width: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .slidepdf-container' => 'width: {{SIZE}}{{UNIT}} !important;',
                 ],
             ]
         );
@@ -154,7 +154,7 @@ class Elementor_Widget extends \Elementor\Widget_Base
                     ],
                 ],
                 'selectors' => [
-                    '{{WRAPPER}} .slidepdf-container' => 'height: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .slidepdf-container' => 'height: {{SIZE}}{{UNIT}} !important;',
                 ],
             ]
         );
@@ -176,7 +176,7 @@ class Elementor_Widget extends \Elementor\Widget_Base
                 'label' => esc_html__('Background', 'slidepdf'),
                 'type' => \Elementor\Controls_Manager::COLOR,
                 'selectors' => [
-                    '{{WRAPPER}} .slidepdf canvas' => 'background-color: {{VALUE}};',
+                    '{{WRAPPER}} .slidepdf-container' => '--slidepdf-slide_bg: {{VALUE}} !important;',
                 ],
             ]
         );
@@ -187,15 +187,9 @@ class Elementor_Widget extends \Elementor\Widget_Base
             [
                 'label' => esc_html__('Border Radius', 'slidepdf'),
                 'type' => \Elementor\Controls_Manager::SLIDER,
-                'size_units' => ['px'],
-                'range' => [
-                    'px' => [
-                        'min' => 0,
-                        'max' => 1000,
-                    ],
-                ],
+                'size_units' => ['px', 'em', '%', 'rem'],
                 'selectors' => [
-                    '{{WRAPPER}} .slidepdf canvas' => 'border-radius: {{SIZE}}{{UNIT}};',
+                    '{{WRAPPER}} .slidepdf-container' => '--slidepdf-slide_radius: {{SIZE}}{{UNIT}} !important;',
                 ],
             ]
         );
@@ -206,18 +200,13 @@ class Elementor_Widget extends \Elementor\Widget_Base
             [
                 'label' => esc_html__('Border Width', 'slidepdf'),
                 'type' => \Elementor\Controls_Manager::SLIDER,
-                'size_units' => ['px'],
-                'range' => [
-                    'px' => [
-                        'min' => 0,
-                        'max' => 20,
-                    ],
-                ],
+                'size_units' => ['px', 'em', '%', 'rem'],
                 'selectors' => [
-                    '{{WRAPPER}} .slidepdf canvas' => 'border-width: {{SIZE}}{{UNIT}}; border-style: solid;',
+                    '{{WRAPPER}} .slidepdf-container' => '--slidepdf-slide_border_width: {{SIZE}}{{UNIT}} !important;',
                 ],
             ]
         );
+
 
         $this->add_control(
             'slide_border_color',
@@ -225,7 +214,7 @@ class Elementor_Widget extends \Elementor\Widget_Base
                 'label' => esc_html__('Border Color', 'slidepdf'),
                 'type' => \Elementor\Controls_Manager::COLOR,
                 'selectors' => [
-                    '{{WRAPPER}} .slidepdf canvas' => 'border-color: {{VALUE}};',
+                    '{{WRAPPER}} .slidepdf-container' => '--slidepdf-button_border_color: {{VALUE}} !important;',
                 ],
                 'condition' => [
                     'slide_border_width!' => '',

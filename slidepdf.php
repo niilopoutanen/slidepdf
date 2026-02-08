@@ -88,6 +88,10 @@ add_action('elementor/widgets/register', function ($widgets_manager) {
 
 function render_shortcode($atts)
 {
+    wp_enqueue_script('pdfjs');
+    wp_enqueue_script('slidepdf');
+    wp_enqueue_style('slidepdf');
+
     if (empty($atts['src'])) {
         return '';
     }
@@ -99,6 +103,9 @@ function render_shortcode($atts)
         return \SlidePDF\UI::get_single($atts['src'], $page);
     }
 
+    wp_enqueue_script('swiper');
+    wp_enqueue_style('swiper');
+    wp_enqueue_style('swiper-pagination');
     return \SlidePDF\UI::get_slider($atts['src'], $config);
 }
 
