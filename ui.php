@@ -36,17 +36,18 @@ class UI
                 <div class="swiper-wrapper">
 
                 </div>
-
-                <div class="controls">
-                    <button class="previous navigation">
-                        <?php echo $chevron_svg; ?>
-                    </button>
-                    <button class="next navigation">
-                        <?php echo $chevron_svg; ?>
-                    </button>
-                    <div class="swiper-pagination"></div>
-                    <a class="download" href="<?php echo esc_url($pdf_url); ?>" download>Download</a>
-                </div>
+                <?php if ($config['show_controls']): ?>
+                    <div class="controls">
+                        <button class="previous navigation">
+                            <?php echo $chevron_svg; ?>
+                        </button>
+                        <button class="next navigation">
+                            <?php echo $chevron_svg; ?>
+                        </button>
+                        <div class="swiper-pagination"></div>
+                        <a class="download" href="<?php echo esc_url($pdf_url); ?>" download>Download</a>
+                    </div>
+                <?php endif; ?>
             </div>
         </div>
         <?php
@@ -67,7 +68,9 @@ class UI
 
         <div class="slidepdf single" id="<?php echo esc_attr($id); ?>" data-pdf="<?php echo esc_url($pdf_url); ?>"
             data-single="true" data-page="<?php echo intval($page_number); ?>">
-            <canvas></canvas>
+            <div class="page">
+                <canvas></canvas>
+            </div>
             <div class="controls">
                 <a class="download" href="<?php echo esc_url($pdf_url); ?>" download>Download</a>
             </div>
@@ -81,10 +84,12 @@ class UI
     private static function get_css(string $target_id, array $config): void
     {
         $defaults = \SlidePDF\Config::defaults()['style'];
-        $style = array_replace($defaults, $config['style'] ?? []);
-        if (empty($style)) {
-            return;
-        }
+
+        $style = wp_parse_args(
+            $config['style'] ?? [],
+            $defaults
+        );
+
         ?>
         <style>
             #<?php echo esc_attr($target_id); ?> {
@@ -104,7 +109,6 @@ class UI
                 --slidepdf-slide-radius: <?php echo intval($style['slide_radius']); ?>px;
                 --slidepdf-slide-border-width: <?php echo intval($style['slide_border_width']); ?>px;
                 --slidepdf-slide-border-color: <?php echo esc_html($style['slide_border_color']); ?>;
-                --slidepdf-slide-shadow: <?php echo esc_html($style['slide_shadow']); ?>;
 
                 --slidepdf-pagination-color: <?php echo esc_html($style['pagination_color']); ?>;
                 --slidepdf-pagination-active: <?php echo esc_html($style['pagination_active']); ?>;
@@ -116,6 +120,7 @@ class UI
         </style>
         <?php
     }
+
 
 
 }

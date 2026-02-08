@@ -23,7 +23,7 @@ final class Config
 
                 'slide_radius' => 20,
                 'slide_border_width' => 2,
-                'slide_border_color' => '#84848444',
+                'slide_border_color' => '#e3e3e3',
                 'slide_bg' => '#ffffff',
 
                 'pagination_color' => '#121212',
@@ -52,42 +52,50 @@ final class Config
 
     public static function get(): array
     {
-        return wp_parse_args(
-            get_option(self::OPTION_KEY, []),
-            self::defaults()
-        );
+        $saved = get_option('slidepdf_config', []);
+
+        return self::merge(self::defaults(), $saved);
     }
 
-    /**
-     * Merge runtime overrides (Elementor / shortcode)
-     * Only non-null values override defaults
-     */
-    public static function merge(array $overrides): array
+
+    private static function merge(array $defaults, array $saved): array
     {
-        return array_replace_recursive(
-            self::get(),
-            array_filter($overrides, fn($v) => $v !== null)
-        );
+        foreach ($saved as $key => $value) {
+            if (is_array($value) && isset($defaults[$key]) && is_array($defaults[$key])) {
+                $defaults[$key] = self::merge($defaults[$key], $value);
+            } else {
+                $defaults[$key] = $value;
+            }
+        }
+
+        return $defaults;
     }
+
 
     public static function sanitize(array $input): array
     {
         $defaults = self::defaults();
+        $saved = get_option(self::OPTION_KEY, []);
 
-        return [
-            'style' => [
-                'button_bg' => sanitize_hex_color($input['style']['button_bg'] ?? $defaults['style']['button_bg']),
-                'button_icon' => sanitize_hex_color($input['style']['button_icon'] ?? $defaults['style']['button_icon']),
-                'button_radius' => absint($input['style']['button_radius'] ?? $defaults['style']['button_radius']),
-                'slide_radius' => absint($input['style']['slide_radius'] ?? $defaults['style']['slide_radius']),
-            ],
-            'swiper' => [
-                'slidesPerView' => absint($input['swiper']['slidesPerView'] ?? $defaults['swiper']['slidesPerView']),
-                'spaceBetween' => absint($input['swiper']['spaceBetween'] ?? $defaults['swiper']['spaceBetween']),
-                'loop' => !empty($input['swiper']['loop']),
-            ],
-        ];
+        $clean = self::merge($defaults, $saved);
+        $clean = self::merge($clean, $input);
+
+        $clean['style']['button_bg'] = sanitize_hex_color($clean['style']['button_bg']);
+        $clean['style']['button_icon'] = sanitize_hex_color($clean['style']['button_icon']);
+        $clean['style']['width'] = sanitize_text_field($clean['style']['width']);
+        $clean['style']['height'] = sanitize_text_field($clean['style']['height']);
+
+        $clean['swiper']['slidesPerView'] = absint($clean['swiper']['slidesPerView']);
+        $clean['swiper']['loop'] = !empty($clean['swiper']['loop']);
+
+        $clean['show_controls'] = !empty($input['show_controls']);
+        $clean['show_pagination'] = !empty($input['show_pagination']);
+        $clean['show_download'] = !empty($input['show_download']);
+
+
+        return $clean;
     }
+
 
     public static function register(): void
     {

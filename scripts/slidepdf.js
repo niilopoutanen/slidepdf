@@ -45,9 +45,12 @@ document.querySelectorAll('.slidepdf').forEach(async (root) => {
         for (let i = 1; i <= pdf.numPages; i++) {
             const slide = document.createElement('div');
             slide.className = 'swiper-slide';
+            const pageDiv = document.createElement('div');
+            pageDiv.classList.add('page');
 
             const canvas = document.createElement('canvas');
-            slide.appendChild(canvas);
+            pageDiv.appendChild(canvas);
+            slide.appendChild(pageDiv);
             wrapper.appendChild(slide);
 
             const page = await pdf.getPage(i);

@@ -325,13 +325,15 @@ class Elementor_Widget extends \Elementor\Widget_Base
             return;
         }
 
-        echo UI::get_slider($pdf_url, [
-            'swiper' => [
-                'slidesPerView' => (int) $settings['slides_per_view'],
-                'spaceBetween' => (int) $settings['space_between'],
-                'loop' => $settings['loop'] === 'yes',
-            ],
+        $config = \SlidePDF\Config::get();
+
+        $config['swiper'] = array_replace($config['swiper'], [
+            'slidesPerView' => (int) $settings['slides_per_view'],
+            'spaceBetween' => (int) $settings['space_between'],
+            'loop' => $settings['loop'] === 'yes',
         ]);
+
+        echo UI::get_slider($pdf_url, $config);
     }
 
 

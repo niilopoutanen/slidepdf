@@ -10,13 +10,15 @@
     min-height: 200px;
 }
 
-.slidepdf canvas {
+.slidepdf .page {
     border-radius: var(--slidepdf-slide-radius, 20px);
     overflow: hidden;
     border-style: solid;
     border-width: var(--slidepdf-slide-border-width, 2px);
     border-color: var(--slidepdf-slide-border-color, #84848444);
     box-sizing: border-box;
+    height: 100%;
+    width: 100%;
 }
 
 .slidepdf .controls {
