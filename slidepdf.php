@@ -78,6 +78,14 @@ add_filter('script_loader_tag', function ($tag, $handle) {
     return $tag;
 }, 10, 2);
 
+add_action('plugins_loaded', function() {
+    load_plugin_textdomain(
+        'slidepdf',
+        false,
+        dirname(plugin_basename(__FILE__)) . '/languages'
+    );
+});
+
 
 add_action('elementor/widgets/register', function ($widgets_manager) {
     if (defined('ELEMENTOR_PATH') && class_exists('\Elementor\Widget_Base')) {
