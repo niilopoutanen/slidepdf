@@ -106,8 +106,7 @@ final class Config
 
     }
 
-
-    public static function get(): array
+    public static function getItems(): array
     {
         $stored = get_option(self::OPTION_KEY, []);
         $defaults = self::defaults();
@@ -121,6 +120,22 @@ final class Config
         }
 
         return $defaults;
+    }
+
+    public static function get(): array
+    {
+        $stored = get_option(self::OPTION_KEY, []);
+        $defaults = self::defaults();
+        $values = [];
+
+        foreach ($defaults as $section => $items) {
+            foreach ($items as $item) {
+                $values[$section][$item->id] =
+                    $stored[$section][$item->id] ?? $item->value;
+            }
+        }
+
+        return $values;
     }
 
 
@@ -140,15 +155,50 @@ final class Config
     public static function toCss(array $config): string
     {
         $lines = [];
-        foreach ($config['style'] as $item) {
-            $lines[] = "--slidepdf-{$item->id}: {$item->toCss()};";
+        $defaults = self::defaults();
+
+        foreach ($defaults['style'] as $item) {
+            $value = $config['style'][$item->id] ?? $item->value;
+            $lines[] = "--slidepdf-{$item->id}: "
+                    . ($item->unit ? "{$value}{$item->unit}" : $value)
+                    . ";";
         }
+
         return implode("\n", $lines);
     }
 
     public static function sanitize(array $input): array
     {
-        return $input;
+        $defaults = self::defaults();
+        $clean = [];
+
+        foreach ($defaults as $section => $items) {
+            foreach ($items as $item) {
+                $id = $item->id;
+                $default = $item->value;
+
+                if (!isset($input[$section][$id])) {
+                    if (is_bool($default)) {
+                        $clean[$section][$id] = false;
+                    }
+                    continue;
+                }
+
+                $value = $input[$section][$id];
+
+                if (is_bool($default)) {
+                    $clean[$section][$id] = (bool) $value;
+                } elseif (is_int($default)) {
+                    $clean[$section][$id] = (int) $value;
+                } elseif (is_float($default)) {
+                    $clean[$section][$id] = (float) $value;
+                } else {
+                    $clean[$section][$id] = sanitize_text_field($value);
+                }
+            }
+        }
+
+        return $clean;
     }
 
 

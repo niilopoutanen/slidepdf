@@ -18,11 +18,9 @@ function render_page()
         delete_option(Config::OPTION_KEY);
         $config = Config::defaults();
         echo '<div class="updated notice"><p>Settings have been reset to defaults.</p></div>';
-    } else {
-        $config = Config::get();
     }
 
-    $config = Config::get(); ?>
+    $config = Config::getItems(); ?>
 
     <style>
         .section.header {

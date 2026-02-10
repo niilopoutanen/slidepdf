@@ -42,6 +42,9 @@ function initSlidePDF(root) {
                 slidesPerView: options.slidesPerView || 1,
                 spaceBetween: options.spaceBetween || 10,
                 loop: options.loop || false,
+                speed: options.speed || 300,
+                centeredSlides: options.centeredSlides || false,
+                autoHeight: options.autoHeight || false,
                 pagination: {
                     el: root.querySelector('.swiper-pagination'),
                     clickable: true,

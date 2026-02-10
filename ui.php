@@ -13,7 +13,8 @@ class UI
     {
         $id = 'slidepdf-' . wp_unique_id();
 
-        $swiper_options = esc_attr(wp_json_encode($config['swiper']));
+        $stored = Config::get();
+        $config = array_replace_recursive($stored, $config);
 
         $chevron_svg = file_get_contents(
             plugin_dir_path(__FILE__) . 'assets/chevron.svg'
@@ -25,20 +26,25 @@ class UI
         <?php echo '<style>#' . $id . '{' . Config::toCss($config) . '}</style>'; ?>
         <div class="slidepdf-container" id="<?php echo esc_attr($id); ?>">
             <div class="slidepdf" data-pdf="<?php echo esc_url($pdf_url); ?>"
-                data-swiperconfig="<?php echo esc_attr($swiper_options); ?>">
+                data-swiperconfig="<?php echo esc_attr(wp_json_encode($config['swiper'])); ?>">
                 <div class="swiper-wrapper">
 
                 </div>
-                <div class="controls">
-                    <button class="previous navigation">
-                        <?php echo $chevron_svg; ?>
-                    </button>
-                    <button class="next navigation">
-                        <?php echo $chevron_svg; ?>
-                    </button>
-                    <div class="swiper-pagination"></div>
-                    <a class="download" href="<?php echo esc_url($pdf_url); ?>" download>Download</a>
-                </div>
+                <?php if (($config['features']['show_controls'] ?? true) !== false): ?>
+                    <div class="controls">
+                        <button class="previous navigation"><?php echo $chevron_svg; ?></button>
+                        <button class="next navigation"><?php echo $chevron_svg; ?></button>
+
+                        <?php if (($config['features']['show_pagination'] ?? true) !== false): ?>
+                            <div class="swiper-pagination"></div>
+                        <?php endif; ?>
+
+                        <?php if (($config['features']['show_download'] ?? true) !== false): ?>
+                            <a class="download" href="<?php echo esc_url($pdf_url); ?>" download>Download</a>
+                        <?php endif; ?>
+
+                    </div>
+                <?php endif; ?>
             </div>
         </div>
         <?php
@@ -58,9 +64,13 @@ class UI
             <div class="page">
                 <canvas></canvas>
             </div>
+            <?php if (($config['features']['show_controls'] ?? true) !== false): ?>
             <div class="controls">
-                <a class="download" href="<?php echo esc_url($pdf_url); ?>" download>Download</a>
+                <?php if (($config['features']['show_download'] ?? true) !== false): ?>
+                    <a class="download" href="<?php echo esc_url($pdf_url); ?>" download>Download</a>
+                <?php endif; ?>
             </div>
+            <?php endif; ?>
         </div>
         <?php
 
