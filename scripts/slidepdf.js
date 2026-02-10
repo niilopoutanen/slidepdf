@@ -23,7 +23,11 @@ function initSlidePDF(root) {
     const isSingle = root.dataset.single === 'true';
     const pageNumber = parseInt(root.dataset.page || '1', 10);
 
-    pdfjsLib.getDocument(pdfUrl).promise.then(async (pdf) => {
+    pdfjsLib.getDocument({
+        url: pdfUrl,
+        wasmURL: new URL('./pdfjs/wasm/openjpeg.wasm', import.meta.url).toString(),
+        fallbackJS: new URL('./pdfjs/wasm/openjpeg_nowasm_fallback.js', import.meta.url).toString(),
+    }).promise.then(async (pdf) => {
         if (isSingle) {
             const canvas = root.querySelector('canvas');
             if (!canvas) return;
