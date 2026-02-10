@@ -87,9 +87,6 @@ add_action('elementor/widgets/register', function ($widgets_manager) {
     }
 });
 
-add_action('plugins_loaded', function() {
-    load_plugin_textdomain('slidepdf', false, dirname(plugin_basename(__FILE__)) . '/languages');
-});
 
 function render_shortcode($atts)
 {

@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: SlidePDF 0.2.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/slidepdf\n"
-"POT-Creation-Date: 2026-02-10T17:50:25+00:00\n"
-"PO-Revision-Date: 2026-02-10 19:59+0200\n"
+"POT-Creation-Date: 2026-02-10T18:09:52+00:00\n"
+"PO-Revision-Date: 2026-02-10 20:10+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fi\n"
@@ -16,7 +16,7 @@ msgstr ""
 "X-Domain: slidepdf\n"
 
 #. Plugin Name of the plugin
-#: slidepdf.php elementor-widget.php:15
+#: slidepdf.php admin-page.php:100 elementor-widget.php:15
 msgid "SlidePDF"
 msgstr ""
 
@@ -40,9 +40,33 @@ msgstr ""
 msgid "https://poutanen.dev/"
 msgstr ""
 
+#: admin-page.php:20
+msgid "Settings have been reset to defaults."
+msgstr "Asetukset on nollattu oletuksiin."
+
+#: admin-page.php:101
+msgid "Simple way to embed PDFs on your website"
+msgstr "Helppo tapa upottaa PDF-tiedostoja verkkosivuillesi"
+
+#: admin-page.php:106
+msgid "Usage"
+msgstr "Käyttö"
+
+#: admin-page.php:107
+msgid "Load in a slider"
+msgstr "Lataa slider-komponenttiin"
+
+#: admin-page.php:112
+msgid "Load only a single page"
+msgstr "Lataa vain yksi sivu"
+
 #: admin-page.php:162
 msgid "Save Settings"
 msgstr "Tallenna asetukset"
+
+#: admin-page.php:168
+msgid "Reset to Defaults"
+msgstr "Palauta oletukset"
 
 #: config.php:66 elementor-widget.php:116
 msgid "Width"
@@ -226,7 +250,7 @@ msgstr "Koko (px)"
 
 #: elementor-widget.php:269
 msgid "Slider"
-msgstr "Liukukomponentti"
+msgstr "Slider-komponentti"
 
 #: elementor-widget.php:285
 msgid "Space between slides (px)"
@@ -235,3 +259,7 @@ msgstr "Diojen välitys (px)"
 #: elementor-widget.php:294
 msgid "Loop"
 msgstr "Toista uudelleen"
+
+#: ui.php:43 ui.php:70
+msgid "Download PDF"
+msgstr "Lataa PDF"

@@ -23,7 +23,7 @@ class UI
 
         ob_start();
         ?>
-        <?php echo '<style>#' . $id . '{' . Config::toCss($config) . '}</style>'; ?>
+        <style>#<?php echo esc_attr($id); ?> {<?php echo esc_html(Config::toCss($config)); ?>}</style>
         <div class="slidepdf-container" id="<?php echo esc_attr($id); ?>">
             <div class="slidepdf" data-pdf="<?php echo esc_url($pdf_url); ?>"
                 data-swiperconfig="<?php echo esc_attr(wp_json_encode($config['swiper'])); ?>">
@@ -40,7 +40,7 @@ class UI
                         <?php endif; ?>
 
                         <?php if (($config['features']['show_download'] ?? true) !== false): ?>
-                            <a class="download" href="<?php echo esc_url($pdf_url); ?>" download>Download</a>
+                            <a class="download" href="<?php echo esc_url($pdf_url); ?>" download><?php esc_html_e("Download PDF", "slidepdf"); ?></a>
                         <?php endif; ?>
 
                     </div>
@@ -57,7 +57,7 @@ class UI
         $config = Config::get();
         ob_start();
         ?>
-        <?php echo '<style>#' . $id . '{' . Config::toCss($config) . '}</style>'; ?>
+        <style>#<?php echo esc_attr($id); ?> {<?php echo esc_html(Config::toCss($config)); ?>}</style>
 
         <div class="slidepdf single" id="<?php echo esc_attr($id); ?>" data-pdf="<?php echo esc_url($pdf_url); ?>"
             data-single="true" data-page="<?php echo intval($page_number); ?>">
@@ -67,7 +67,7 @@ class UI
             <?php if (($config['features']['show_controls'] ?? true) !== false): ?>
             <div class="controls">
                 <?php if (($config['features']['show_download'] ?? true) !== false): ?>
-                    <a class="download" href="<?php echo esc_url($pdf_url); ?>" download>Download</a>
+                    <a class="download" href="<?php echo esc_url($pdf_url); ?>" download><?php esc_html_e("Download PDF", "slidepdf"); ?></a>
                 <?php endif; ?>
             </div>
             <?php endif; ?>
