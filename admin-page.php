@@ -17,7 +17,7 @@ function render_page()
     if (!empty($_POST['slidepdf_reset']) && check_admin_referer('slidepdf_reset_defaults')) {
         delete_option(Config::OPTION_KEY);
         $config = Config::defaults();
-        echo '<div class="updated notice"><p>Settings have been reset to defaults.</p></div>';
+        echo '<div class="updated notice"><p>' . esc_html__('Settings have been reset to defaults.', 'slidepdf') . '</p></div>';
     }
 
     $config = Config::getItems(); ?>
@@ -97,19 +97,19 @@ function render_page()
     <div class="header section">
         <img class="icon" src="<?php echo plugin_dir_url(__FILE__) . 'assets/icon.svg'; ?>" />
         <div class="content">
-            <h1>SlidePDF</h1>
-            <p>Simple way to embed PDFs on your website</p>
+            <h1><?php echo esc_html__('SlidePDF', 'slidepdf'); ?></h1>
+            <p><?php echo esc_html__('Simple way to embed PDFs on your website', 'slidepdf'); ?></p>
         </div>
     </div>
 
     <div class="section guide">
-        <h2>Usage</h2>
-        <span class="label">Load in a slider</span>
+        <h2><?php echo esc_html__('Usage', 'slidepdf'); ?></h2>
+        <span class="label"><?php echo esc_html__('Load in a slider', 'slidepdf'); ?></span>
         <code class="shortcode" onclick="copyShortcode(this)">
                     [slidepdf src="https://example.com/file.pdf"]
                 </code>
 
-        <span class="label">Load only a single page</span>
+        <span class="label"><?php echo esc_html__('Load only a single page', 'slidepdf'); ?></span>
         <code class="shortcode" onclick="copyShortcode(this)">
                     [slidepdf src="https://example.com/file.pdf" page="2"]
                 </code>
@@ -165,7 +165,7 @@ function render_page()
     <form method="post" action="">
         <?php wp_nonce_field('slidepdf_reset_defaults'); ?>
         <input type="hidden" name="slidepdf_reset" value="1">
-        <?php submit_button('Reset to Defaults', 'secondary'); ?>
+        <?php submit_button(esc_html__('Reset to Defaults', 'slidepdf'), 'secondary'); ?>
     </form>
 
 

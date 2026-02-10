@@ -11,6 +11,7 @@ namespace SlidePDF;
  * Text Domain:       slidepdf
  * License:           GPLv2 or later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
+ * Domain path:       /languages
  */
 
 if (!defined('ABSPATH')) {
@@ -84,6 +85,10 @@ add_action('elementor/widgets/register', function ($widgets_manager) {
 
         $widgets_manager->register(new Elementor_Widget());
     }
+});
+
+add_action('plugins_loaded', function() {
+    load_plugin_textdomain('slidepdf', false, dirname(plugin_basename(__FILE__)) . '/languages');
 });
 
 function render_shortcode($atts)

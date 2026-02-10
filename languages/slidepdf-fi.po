@@ -1,0 +1,237 @@
+# Copyright (C) 2026 Niilo Poutanen
+# This file is distributed under the GPLv2 or later.
+msgid ""
+msgstr ""
+"Project-Id-Version: SlidePDF 0.2.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/slidepdf\n"
+"POT-Creation-Date: 2026-02-10T17:50:25+00:00\n"
+"PO-Revision-Date: 2026-02-10 19:59+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.8\n"
+"X-Domain: slidepdf\n"
+
+#. Plugin Name of the plugin
+#: slidepdf.php elementor-widget.php:15
+msgid "SlidePDF"
+msgstr ""
+
+#. Plugin URI of the plugin
+#: slidepdf.php
+msgid "https://github.com/niilopoutanen/slidepdf"
+msgstr ""
+
+#. Description of the plugin
+#: slidepdf.php
+msgid "Load a PDF file into a embedded slider viewer."
+msgstr "Lataa PDF-tiedosto upotettuun liukunäkymään."
+
+#. Author of the plugin
+#: slidepdf.php
+msgid "Niilo Poutanen"
+msgstr ""
+
+#. Author URI of the plugin
+#: slidepdf.php
+msgid "https://poutanen.dev/"
+msgstr ""
+
+#: admin-page.php:162
+msgid "Save Settings"
+msgstr "Tallenna asetukset"
+
+#: config.php:66 elementor-widget.php:116
+msgid "Width"
+msgstr "Leveys"
+
+#: config.php:67 elementor-widget.php:143
+msgid "Height"
+msgstr "Korkeus"
+
+#: config.php:69
+msgid "Button background color"
+msgstr "Painikkeen taustaväri"
+
+#: config.php:70
+msgid "Button foreground color"
+msgstr "Painikkeen kuvakeväri"
+
+#: config.php:71
+msgid "Button border radius"
+msgstr "Painikkeen reunan pyöreys"
+
+#: config.php:72
+msgid "Button size"
+msgstr "Painikkeen koko"
+
+#: config.php:73
+msgid "Button border width"
+msgstr "Painikkeen reunan leveys"
+
+#: config.php:74
+msgid "Button border color"
+msgstr "Painikkeen reunan väri"
+
+#: config.php:75
+msgid "Button background color on hover"
+msgstr "Painikkeen taustaväri hiiren ollessa päällä"
+
+#: config.php:76
+msgid "Button foreground color on hover"
+msgstr "Painikkeen kuvakeväri hiiren ollessa päällä"
+
+#: config.php:78
+msgid "Slide border radius"
+msgstr "Dian reunan pyöreys"
+
+#: config.php:79
+msgid "Slide border width"
+msgstr "Dian reunan leveys"
+
+#: config.php:80
+msgid "Slide border color"
+msgstr "Dian reunan väri"
+
+#: config.php:81
+msgid "Slide background color"
+msgstr "Dian taustan väri"
+
+#: config.php:83
+msgid "Pagination color"
+msgstr "Sivunumeroinnin väri"
+
+#: config.php:84
+msgid "Active pagination color"
+msgstr "Aktiivisen sivunumeron väri"
+
+#: config.php:85
+msgid "Pagination size"
+msgstr "Sivunumeron koko"
+
+#: config.php:87
+msgid "Controls gap"
+msgstr "Painikkeiden väli"
+
+#: config.php:88
+msgid "Controls opacity"
+msgstr "Painikkeiden läpinäkyvyys"
+
+#: config.php:92 elementor-widget.php:276
+msgid "Slides per view"
+msgstr "Dioja per näkymä"
+
+#: config.php:93
+msgid "Space between slides"
+msgstr "Diojen välitys"
+
+#: config.php:94
+msgid "Loop slides"
+msgstr "Toista diat uudelleen"
+
+#: config.php:95
+msgid "Transition speed"
+msgstr "Siirtymän nopeus"
+
+#: config.php:96
+msgid "Centered slides"
+msgstr "Keskitetyt diat"
+
+#: config.php:97
+msgid "Auto height"
+msgstr "Automaattinen korkeus"
+
+#: config.php:101
+msgid "Show controls"
+msgstr "Näytä painikkeet"
+
+#: config.php:102
+msgid "Show pagination"
+msgstr "Näytä sivunumerot"
+
+#: config.php:103
+msgid "Show download button"
+msgstr "Näytä latauspainike"
+
+#: elementor-widget.php:58
+msgid "Content"
+msgstr "Sisältö"
+
+#: elementor-widget.php:65
+msgid "Use Media Library?"
+msgstr "Käytä mediakirjastoa?"
+
+#: elementor-widget.php:67
+msgid "Yes"
+msgstr "Kyllä"
+
+#: elementor-widget.php:68
+msgid "No"
+msgstr "Ei"
+
+#: elementor-widget.php:77
+msgid "PDF URL"
+msgstr "PDF URL"
+
+#: elementor-widget.php:80
+msgid "https://example.com/sample.pdf"
+msgstr ""
+
+#: elementor-widget.php:91
+msgid "Select PDF"
+msgstr "Valitse PDF"
+
+#: elementor-widget.php:108
+msgid "Layout"
+msgstr "Asettelu"
+
+#: elementor-widget.php:168
+msgid "Slides"
+msgstr "Diat"
+
+#: elementor-widget.php:176
+msgid "Background"
+msgstr "Tausta"
+
+#: elementor-widget.php:188
+msgid "Border Radius"
+msgstr "Reunan pyöreys"
+
+#: elementor-widget.php:201
+msgid "Border Width"
+msgstr "Reunan leveys"
+
+#: elementor-widget.php:214
+msgid "Border Color"
+msgstr "Reunan väri"
+
+#: elementor-widget.php:233
+msgid "Pagination"
+msgstr "Sivunumerot"
+
+#: elementor-widget.php:241
+msgid "Color"
+msgstr "Väri"
+
+#: elementor-widget.php:249
+msgid "Active color"
+msgstr "Aktiivinen väri"
+
+#: elementor-widget.php:257
+msgid "Size (px)"
+msgstr "Koko (px)"
+
+#: elementor-widget.php:269
+msgid "Slider"
+msgstr "Liukukomponentti"
+
+#: elementor-widget.php:285
+msgid "Space between slides (px)"
+msgstr "Diojen välitys (px)"
+
+#: elementor-widget.php:294
+msgid "Loop"
+msgstr "Toista uudelleen"
