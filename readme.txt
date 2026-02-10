@@ -4,7 +4,7 @@ Contributors: niilopoutanen
 Tags: pdf, pdf-viewer, slidepdf, embed-pdf, pdf-embedder
 License: GPLv2 or later
 Tested up to: 6.9
-Stable tag: 0.2.1
+Stable tag: 0.2.2
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 SlidePDF is a simple way to embed PDFs to your site in a simple slider view.
@@ -38,5 +38,11 @@ In Tools -> SlidePDF admin page.
 
 == Changelog ==
 
-= 0.1 =
+= 0.2.2 =
+* Minor translation fixes
+
+= 0.2.1 =
+* Added translation system & FI translation
+
+= 0.2.0 =
 * Initial public release

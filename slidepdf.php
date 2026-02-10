@@ -5,7 +5,7 @@ namespace SlidePDF;
  * Plugin Name:       SlidePDF
  * Plugin URI:        https://github.com/niilopoutanen/slidepdf
  * Description:       Load a PDF file into a embedded slider viewer.
- * Version:           0.2.1
+ * Version:           0.2.2
  * Author:            Niilo Poutanen
  * Author URI:        https://poutanen.dev/
  * Text Domain:       slidepdf
