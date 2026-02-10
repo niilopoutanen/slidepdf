@@ -4,7 +4,7 @@ Contributors: niilopoutanen
 Tags: pdf, pdf-viewer, slidepdf, embed-pdf, pdf-embedder
 License: GPLv2 or later
 Tested up to: 6.9
-Stable tag: 0.1.1
+Stable tag: 0.2.0
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 SlidePDF is a simple way to embed PDFs to your site in a simple slider view.
@@ -32,6 +32,9 @@ Use the `slides_per_view` attribute in the shortcode or the corresponding contro
 
 The plugin uses [SwiperJS](https://swiperjs.com/) for the slider functionality and [PDF.js](https://mozilla.github.io/pdf.js/) to render PDF files in the browser.
 
+= Where can I customize the plugin? =
+
+In Tools -> SlidePDF admin page.
 
 == Changelog ==
 
