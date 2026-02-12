@@ -5,7 +5,7 @@ namespace SlidePDF;
  * Plugin Name:       SlidePDF
  * Plugin URI:        https://github.com/niilopoutanen/slidepdf
  * Description:       Load a PDF file into a embedded slider viewer.
- * Version:           0.2.2
+ * Version:           0.2.4
  * Author:            Niilo Poutanen
  * Author URI:        https://poutanen.dev/
  * Text Domain:       slidepdf
@@ -80,8 +80,7 @@ function register_scripts()
         'slidepdf',
         'SlidePDFData',
         [
-            'wasmUrl' => plugins_url('scripts/pdfjs/wasm/openjpeg.wasm', __FILE__),
-            'fallbackUrl' => plugins_url('scripts/pdfjs/wasm/openjpeg_nowasm_fallback.js', __FILE__),
+            'wasmUrl' => plugins_url('scripts/pdfjs/wasm/', __FILE__),
             'workerUrl' => plugins_url('scripts/pdfjs/pdf.worker.js', __FILE__),
         ]
     );

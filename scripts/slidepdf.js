@@ -25,8 +25,7 @@ function initSlidePDF(root) {
 
     pdfjsLib.getDocument({
         url: pdfUrl,
-        wasmURL: SlidePDFData.wasmUrl,
-        fallbackJS: SlidePDFData.fallbackUrl,
+        wasmUrl: SlidePDFData.wasmUrl,
     }).promise.then(async (pdf) => {
         if (isSingle) {
             const canvas = root.querySelector('canvas');
