@@ -1,6 +1,6 @@
 import * as pdfjsLib from './pdfjs/pdf.js';
-pdfjsLib.GlobalWorkerOptions.workerSrc =
-    new URL('./pdfjs/pdf.worker.js', import.meta.url).toString();
+pdfjsLib.GlobalWorkerOptions.workerSrc = SlidePDFData.workerUrl;
+
 
 const createSwiperInstance = (el, config) => {
     if (typeof Swiper !== 'undefined') {
@@ -25,8 +25,8 @@ function initSlidePDF(root) {
 
     pdfjsLib.getDocument({
         url: pdfUrl,
-        wasmURL: new URL('./pdfjs/wasm/openjpeg.wasm', import.meta.url).toString(),
-        fallbackJS: new URL('./pdfjs/wasm/openjpeg_nowasm_fallback.js', import.meta.url).toString(),
+        wasmURL: SlidePDFData.wasmUrl,
+        fallbackJS: SlidePDFData.fallbackUrl,
     }).promise.then(async (pdf) => {
         if (isSingle) {
             const canvas = root.querySelector('canvas');

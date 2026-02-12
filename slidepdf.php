@@ -68,6 +68,25 @@ function register_scripts()
         '12.1.0'
     );
 
+    wp_register_script(
+        'slidepdf',
+        plugins_url('scripts/slidepdf.js', __FILE__),
+        ['pdfjs'],
+        '1.0',
+        true
+    );
+
+    wp_localize_script(
+        'slidepdf',
+        'SlidePDFData',
+        [
+            'wasmUrl' => plugins_url('scripts/pdfjs/wasm/openjpeg.wasm', __FILE__),
+            'fallbackUrl' => plugins_url('scripts/pdfjs/wasm/openjpeg_nowasm_fallback.js', __FILE__),
+            'workerUrl' => plugins_url('scripts/pdfjs/pdf.worker.js', __FILE__),
+        ]
+    );
+
+
 }
 add_action('wp_enqueue_scripts', '\SlidePDF\register_scripts');
 
@@ -78,7 +97,7 @@ add_filter('script_loader_tag', function ($tag, $handle) {
     return $tag;
 }, 10, 2);
 
-add_action('plugins_loaded', function() {
+add_action('plugins_loaded', function () {
     load_plugin_textdomain(
         'slidepdf',
         false,
