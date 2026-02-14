@@ -1,48 +1,51 @@
 === SlidePDF ===
 
 Contributors: niilopoutanen
-Tags: pdf, pdf-viewer, slidepdf, embed-pdf, pdf-embedder
+Tags: pdf, pdf-viewer, slider, embed, document
 License: GPLv2 or later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Tested up to: 6.9
 Stable tag: 0.2.4
-License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-SlidePDF is a simple way to embed PDFs to your site in a simple slider view.
+Embed PDFs onto your site in a slide view.
 
 == Description ==
 
-SlidePDF allows you to embed PDF documents into a Swiper-based slider. It supports:
+SlidePDF renders PDFs in the browser and shows them in a swipeable slider. Single-page view is also supported for linking to a specific page.
 
-* Multiple pages rendered as slides
-* Configurable slides per view, spacing, and looping
-* Shortcode usage: `[slidepdf src="URL"]`
-* Elementor widget integration with URL or Media Library selection
+* Shortcode: `[slidepdf src="https://example.com/file.pdf"]`. Add `page="3"` for a single page.
+* Elementor: add the SlidePDF widget and pick a PDF (Media Library or URL).
+* Global behaviour and colours are set under Tools → SlidePDF. The Elementor widget can override specific configurations or styles.
+
+Uses the plugin’s own Swiper bundle and PDF.js so it doesn’t depend on Elementor’s scripts.
 
 == Frequently Asked Questions ==
 
-= Can I use a PDF from the Media Library? =
+= How do I change how many slides are visible? =
 
-Yes, the Elementor widget supports selecting a PDF from the Media Library. For shortcodes, provide a direct URL.
+In Elementor, use the widget’s “Slides per view” control. For the shortcode, set the default under Tools → SlidePDF (same page where you set transition speed, loop, colours, etc.).
 
-= How do I control the number of slides per page? =
+= What is used for the slider and PDF rendering? =
 
-Use the `slides_per_view` attribute in the shortcode or the corresponding control in the Elementor widget.
+Swiper JS (slider) and Mozilla’s PDF.js (rendering). Both are bundled with the plugin.
 
-= What packages are included with the plugin? =
+= Where are the plugin settings? =
 
-The plugin uses [SwiperJS](https://swiperjs.com/) for the slider functionality and [PDF.js](https://mozilla.github.io/pdf.js/) to render PDF files in the browser.
-
-= Where can I customize the plugin? =
-
-In Tools -> SlidePDF admin page.
+Tools → SlidePDF.
 
 == Changelog ==
+
+= 0.2.4 =
+* Swiper: use only the plugin’s bundled Swiper 
+
+= 0.2.3 =
+* Bug fixes with missin WASM support
 
 = 0.2.2 =
 * Minor translation fixes
 
 = 0.2.1 =
-* Added translation system & FI translation
+* Translation system and Finnish strings
 
 = 0.2.0 =
-* Initial public release
+* Initial release

@@ -3,14 +3,9 @@ pdfjsLib.GlobalWorkerOptions.workerSrc = SlidePDFData.workerUrl;
 
 
 const createSwiperInstance = (el, config) => {
-    if (typeof Swiper !== 'undefined') {
-        return Promise.resolve(new Swiper(el, config));
+    if (typeof window.SlidePDFSwiper !== 'undefined') {
+        return Promise.resolve(new window.SlidePDFSwiper(el, config));
     }
-
-    if (window.elementorFrontend && elementorFrontend.utils && elementorFrontend.utils.swiper) {
-        return new elementorFrontend.utils.swiper(el, config);
-    }
-
     return Promise.reject(new Error('Swiper API not available'));
 };
 

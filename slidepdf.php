@@ -32,18 +32,20 @@ function register_scripts()
     );
 
     wp_register_script(
-        'slidepdf',
-        plugins_url('scripts/slidepdf.js', __FILE__),
-        ['pdfjs'],
-        '1.0',
-        true
-    );
-
-    wp_register_script(
         'swiper',
         plugins_url('scripts/swiper/swiper-bundle.min.js', __FILE__),
         [],
         '12.1.0',
+        true
+    );
+
+    wp_add_inline_script('swiper', 'window.SlidePDFSwiper = window.Swiper;', 'after');
+
+    wp_register_script(
+        'slidepdf',
+        plugins_url('scripts/slidepdf.js', __FILE__),
+        ['pdfjs', 'swiper'],
+        '1.0',
         true
     );
 
@@ -66,14 +68,6 @@ function register_scripts()
         plugins_url('scripts/swiper/pagination-element.min.css', __FILE__),
         [],
         '12.1.0'
-    );
-
-    wp_register_script(
-        'slidepdf',
-        plugins_url('scripts/slidepdf.js', __FILE__),
-        ['pdfjs'],
-        '1.0',
-        true
     );
 
     wp_localize_script(
