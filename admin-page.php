@@ -86,6 +86,7 @@ function render_page()
                 }
             </script>
 
+            <p><?php echo esc_html__("If your website uses caching, please clear the cache to see your changes after updating settings below (for example: Elementor, LiteSpeed, W3 Total Cache, etc.)", "slidepdf"); ?></p>
         </div>
 
         <form method="post" action="options.php">
