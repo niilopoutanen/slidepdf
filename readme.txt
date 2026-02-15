@@ -5,7 +5,7 @@ Tags: pdf, pdf-viewer, slider, embed, document
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Tested up to: 6.9
-Stable tag: 0.2.5
+Stable tag: 0.2.6
 
 Embed PDFs onto your site in a slide view.
 
@@ -20,10 +20,6 @@ SlidePDF renders PDFs in the browser and shows them in a swipeable slider. Singl
 Uses the plugin’s own Swiper bundle and PDF.js so it doesn’t depend on Elementor’s scripts.
 
 == Frequently Asked Questions ==
-
-= How do I change how many slides are visible? =
-
-In Elementor, use the widget’s “Slides per view” control. For the shortcode, set the default under Tools → SlidePDF (same page where you set transition speed, loop, colours, etc.).
 
 = What is used for the slider and PDF rendering? =
 

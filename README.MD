@@ -25,7 +25,11 @@ WordPress plugin for embedding PDFs onto your site in a slider view.
 
 
 ### Elementor
-Search SlidePDF from widgets gallery. The customization options in the Elementor widget will override the global ones set in admin dashboard.
+* Search SlidePDF from widgets gallery. The customization options in the Elementor widget will override the global ones set in admin dashboard.
+
+
+### Configuration
+* You can edit global styles & options in Wordpress Admin dashboard -> Tools -> SlidePDF. Changes made will affect all instances of the widget. Remember to clear cache afterwards.
 
 
 
