@@ -1,6 +1,12 @@
 [![Banner](https://raw.githubusercontent.com/niilopoutanen/slidepdf/refs/heads/main/assets/banner-1544x500.png)](https://wordpress.org/plugins/slidepdf/)
 
-# SlidePDF
+<h1>
+  <img src="https://github.com/niilopoutanen/slidepdf/blob/main/static/icon.png?raw=true" 
+       alt="Banner" 
+       width="70" 
+       style="vertical-align: middle; margin-right: 10px">
+  SlidePDF 
+</h1>
 
 WordPress plugin for embedding PDFs onto your site in a slider view.
 
