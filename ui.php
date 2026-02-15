@@ -28,7 +28,9 @@ class UI
             <div class="slidepdf" data-pdf="<?php echo esc_url($pdf_url); ?>"
                 data-swiperconfig="<?php echo esc_attr(wp_json_encode($config['swiper'])); ?>">
                 <div class="swiper-wrapper">
-
+                    <div class="swiper-slide loading">
+                        <div class="spinner"></div>
+                    </div>
                 </div>
                 <?php if (($config['features']['show_controls'] ?? true) !== false): ?>
                     <div class="controls">
@@ -62,7 +64,9 @@ class UI
         <div class="slidepdf single" id="<?php echo esc_attr($id); ?>" data-pdf="<?php echo esc_url($pdf_url); ?>"
             data-single="true" data-page="<?php echo intval($page_number); ?>">
             <div class="page">
-                <canvas></canvas>
+                <div class="loading">
+                    <div class="spinner"></div>
+                </div>
             </div>
             <?php if (($config['features']['show_controls'] ?? true) !== false): ?>
             <div class="controls">

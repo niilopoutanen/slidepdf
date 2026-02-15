@@ -24,6 +24,25 @@
     width: 100%;
 }
 
+.slidepdf .loading{
+    aspect-ratio: 16/9;
+    background-color: #e6e6e6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--slidepdf-slide_radius, 20px);
+}
+
+.slidepdf .loading .spinner {
+  width: 50px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 8px solid;
+  border-color: #9d9d9d #0000;
+  animation: l1 1s infinite;
+}
+@keyframes l1 {to{transform: rotate(.5turn)}}
+
 .slidepdf .controls {
     display: flex;
     margin-top: 10px;
@@ -118,4 +137,5 @@
 
 .slidepdf canvas {
     width: 100%;
+    display: block;
 }
