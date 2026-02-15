@@ -9,9 +9,9 @@ class UI
      */
 
 
-    public static function get_slider(string $pdf_url, array $config = []): string
+    public static function get_slider(string $pdf_url, array $config = [], ?string $id = null): string
     {
-        $id = 'slidepdf-' . wp_unique_id();
+        $id = $id ?? 'slidepdf-' . wp_unique_id();
 
         $stored = Config::get();
         $config = array_replace_recursive($stored, $config);
@@ -23,8 +23,8 @@ class UI
 
         ob_start();
         ?>
-        <style>#<?php echo esc_attr($id); ?> {<?php echo esc_html(Config::toCss($config)); ?>}</style>
-        <div class="slidepdf-container" id="<?php echo esc_attr($id); ?>">
+        <style>.<?php echo esc_attr($id); ?> {<?php echo esc_html(Config::toCss($config)); ?>}</style>
+        <div class="slidepdf-container <?php echo esc_attr($id); ?>">
             <div class="slidepdf" data-pdf="<?php echo esc_url($pdf_url); ?>"
                 data-swiperconfig="<?php echo esc_attr(wp_json_encode($config['swiper'])); ?>">
                 <div class="swiper-wrapper">
@@ -51,9 +51,9 @@ class UI
         return ob_get_clean();
     }
 
-    public static function get_single(string $pdf_url, int $page_number = 1): string
+    public static function get_single(string $pdf_url, int $page_number = 1, ?string $id = null): string
     {
-        $id = 'slidepdf-single-' . wp_unique_id();
+        $id = $id ?? 'slidepdf-' . wp_unique_id();
         $config = Config::get();
         ob_start();
         ?>

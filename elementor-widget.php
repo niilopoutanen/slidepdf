@@ -52,6 +52,8 @@ class Elementor_Widget extends \Elementor\Widget_Base
 
     protected function register_controls(): void
     {
+        $config = \SlidePDF\Config::defaults();
+
         $this->start_controls_section(
             'section_content',
             [
@@ -102,204 +104,91 @@ class Elementor_Widget extends \Elementor\Widget_Base
 
         $this->end_controls_section();
 
-        $this->start_controls_section(
-            'section_style_layout',
-            [
-                'label' => esc_html__('Layout', 'slidepdf'),
-                'tab' => \Elementor\Controls_Manager::TAB_STYLE,
-            ]
-        );
+        foreach ($config as $sectionName => $items) {
 
-        $this->add_responsive_control(
-            'style_width',
-            [
-                'label' => esc_html__('Width', 'slidepdf'),
-                'type' => \Elementor\Controls_Manager::SLIDER,
-                'size_units' => ['%', 'px', 'vw'],
-                'range' => [
-                    '%' => [
-                        'min' => 10,
-                        'max' => 100,
-                    ],
-                    'px' => [
-                        'min' => 200,
-                        'max' => 2000,
-                    ],
-                ],
-                'default' => [
-                    'size' => 100,
-                    'unit' => '%',
-                ],
-                'selectors' => [
-                    '{{WRAPPER}} .slidepdf-container' => 'width: {{SIZE}}{{UNIT}} !important;',
-                ],
-            ]
-        );
+            $this->start_controls_section(
+                'section_' . $sectionName,
+                [
+                    'label' => ucfirst($sectionName),
+                    'tab' => \Elementor\Controls_Manager::TAB_STYLE,
+                ]
+            );
+
+            foreach ($items as $item) {
+
+                $control_id = $item->id;
+                $control_label = $item->name;
+                $type = $item->inputType();
 
 
-        $this->add_responsive_control(
-            'style_height',
-            [
-                'label' => esc_html__('Height', 'slidepdf'),
-                'type' => \Elementor\Controls_Manager::SLIDER,
-                'size_units' => ['px', 'vh'],
-                'range' => [
-                    'px' => [
-                        'min' => 200,
-                        'max' => 2000,
-                    ],
-                    'vh' => [
-                        'min' => 20,
-                        'max' => 100,
-                    ],
-                ],
-                'selectors' => [
-                    '{{WRAPPER}} .slidepdf-container' => 'height: {{SIZE}}{{UNIT}} !important;',
-                ],
-            ]
-        );
+                switch ($type) {
+                    case 'color':
+                        $this->add_control(
+                            $control_id,
+                            [
+                                'label' => $control_label,
+                                'type' => \Elementor\Controls_Manager::COLOR,
+                                'selectors' => [
+                                    "{{WRAPPER}} .slidepdf-container" => '--slidepdf-' . $item->id . ': {{VALUE}} !important;',
+                                ],
+                            ]
+                        );
+                        break;
 
+                    case 'number':
+                        $this->add_responsive_control(
+                            $control_id,
+                            [
+                                'label' => $control_label,
+                                'type' => \Elementor\Controls_Manager::SLIDER,
+                                'size_units' => ['px', 'em', '%', 'rem'],
+                                'default' => [
+                                    'size' => $item->value,
+                                    'unit' => $item->unit ?: 'px',
+                                ],
+                                'selectors' => [
+                                    '{{WRAPPER}} .slidepdf-container' => '--slidepdf-' . $item->id . ': {{SIZE}}{{UNIT}} !important;',
+                                ],
+                            ]
+                        );
+                        break;
 
-        $this->end_controls_section();
+                    case 'checkbox':
+                        $this->add_control(
+                            $control_id,
+                            [
+                                'label' => $control_label,
+                                'type' => \Elementor\Controls_Manager::SWITCHER,
+                                'return_value' => 'yes',
+                                'default' => $item->value ? 'yes' : '',
+                                'selectors' => [
+                                    "{{WRAPPER}} .slidepdf-container" => '--slidepdf-' . $item->id . ': {{VALUE}} !important;',
+                                ],
+                            ]
+                        );
+                        break;
 
-        $this->start_controls_section(
-            'section_style_slides',
-            [
-                'label' => esc_html__('Slides', 'slidepdf'),
-                'tab' => \Elementor\Controls_Manager::TAB_STYLE,
-            ]
-        );
+                    case 'text':
+                    default:
+                        $this->add_control(
+                            $control_id,
+                            [
+                                'label' => $control_label,
+                                'type' => \Elementor\Controls_Manager::TEXT,
+                                'default' => $item->value,
+                                'selectors' => [
+                                    "{{WRAPPER}} .slidepdf-container" => '--slidepdf-' . $item->id . ': {{VALUE}} !important;',
+                                ],
+                            ]
+                        );
+                        break;
+                }
+            }
 
-        $this->add_control(
-            'slide_bg',
-            [
-                'label' => esc_html__('Background', 'slidepdf'),
-                'type' => \Elementor\Controls_Manager::COLOR,
-                'selectors' => [
-                    '{{WRAPPER}} .slidepdf-container' => '--slidepdf-slide_bg: {{VALUE}} !important;',
-                ],
-            ]
-        );
-
-
-        $this->add_responsive_control(
-            'slide_radius',
-            [
-                'label' => esc_html__('Border Radius', 'slidepdf'),
-                'type' => \Elementor\Controls_Manager::SLIDER,
-                'size_units' => ['px', 'em', '%', 'rem'],
-                'selectors' => [
-                    '{{WRAPPER}} .slidepdf-container' => '--slidepdf-slide_radius: {{SIZE}}{{UNIT}} !important;',
-                ],
-            ]
-        );
-
-
-        $this->add_responsive_control(
-            'slide_border_width',
-            [
-                'label' => esc_html__('Border Width', 'slidepdf'),
-                'type' => \Elementor\Controls_Manager::SLIDER,
-                'size_units' => ['px', 'em', '%', 'rem'],
-                'selectors' => [
-                    '{{WRAPPER}} .slidepdf-container' => '--slidepdf-slide_border_width: {{SIZE}}{{UNIT}} !important;',
-                ],
-            ]
-        );
-
-
-        $this->add_control(
-            'slide_border_color',
-            [
-                'label' => esc_html__('Border Color', 'slidepdf'),
-                'type' => \Elementor\Controls_Manager::COLOR,
-                'selectors' => [
-                    '{{WRAPPER}} .slidepdf-container' => '--slidepdf-button_border_color: {{VALUE}} !important;',
-                ],
-                'condition' => [
-                    'slide_border_width!' => '',
-                ],
-            ]
-        );
-
-
-
-        $this->end_controls_section();
-
-
-        $this->start_controls_section(
-            'section_style_pagination',
-            [
-                'label' => esc_html__('Pagination', 'slidepdf'),
-                'tab' => \Elementor\Controls_Manager::TAB_STYLE,
-            ]
-        );
-
-        $this->add_control(
-            'pagination_color',
-            [
-                'label' => esc_html__('Color', 'slidepdf'),
-                'type' => \Elementor\Controls_Manager::COLOR,
-            ]
-        );
-
-        $this->add_control(
-            'pagination_active',
-            [
-                'label' => esc_html__('Active color', 'slidepdf'),
-                'type' => \Elementor\Controls_Manager::COLOR,
-            ]
-        );
-
-        $this->add_control(
-            'pagination_size',
-            [
-                'label' => esc_html__('Size (px)', 'slidepdf'),
-                'type' => \Elementor\Controls_Manager::NUMBER,
-                'min' => 4,
-            ]
-        );
-
-        $this->end_controls_section();
-
-
-        $this->start_controls_section(
-            'section_swiper',
-            [
-                'label' => esc_html__('Slider', 'slidepdf'),
-            ]
-        );
-
-        $this->add_control(
-            'slides_per_view',
-            [
-                'label' => esc_html__('Slides per view', 'slidepdf'),
-                'type' => \Elementor\Controls_Manager::NUMBER,
-                'min' => 1,
-            ]
-        );
-
-        $this->add_control(
-            'space_between',
-            [
-                'label' => esc_html__('Space between slides (px)', 'slidepdf'),
-                'type' => \Elementor\Controls_Manager::NUMBER,
-                'min' => 0,
-            ]
-        );
-
-        $this->add_control(
-            'loop',
-            [
-                'label' => esc_html__('Loop', 'slidepdf'),
-                'type' => \Elementor\Controls_Manager::SWITCHER,
-            ]
-        );
-
-        $this->end_controls_section();
-
-
+            $this->end_controls_section();
+        }
     }
+
 
 
     protected function render(): void
@@ -317,12 +206,14 @@ class Elementor_Widget extends \Elementor\Widget_Base
         $config = \SlidePDF\Config::get();
 
         $config['swiper'] = array_replace($config['swiper'], [
-            'slidesPerView' => (int) $settings['slides_per_view'],
-            'spaceBetween' => (int) $settings['space_between'],
-            'loop' => $settings['loop'] === 'yes',
+            'slidesPerView' => isset($settings['slidesPerView']) ? (int) $settings['slidesPerView'] : 1,
+            'spaceBetween' => isset($settings['spaceBetween']) ? (int) $settings['spaceBetween'] : 0,
+            'loop' => isset($settings['loop']) && $settings['loop'] === 'yes',
         ]);
 
-        echo UI::get_slider($pdf_url, $config);
+
+        $id = 'slidepdf-' . $this->get_id();
+        echo UI::get_slider($pdf_url, $config, $id);
     }
 
 
