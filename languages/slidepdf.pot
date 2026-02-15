@@ -2,21 +2,23 @@
 # This file is distributed under the GPLv2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: SlidePDF 0.2.0\n"
+"Project-Id-Version: SlidePDF 0.2.6\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/slidepdf\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-02-10T18:09:52+00:00\n"
+"POT-Creation-Date: 2026-02-15T13:28:51+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: slidepdf\n"
 
 #. Plugin Name of the plugin
 #: slidepdf.php
-#: admin-page.php:100
+#: admin-page.php:11
+#: admin-page.php:12
+#: admin-page.php:42
 #: elementor-widget.php:15
 msgid "SlidePDF"
 msgstr ""
@@ -41,41 +43,58 @@ msgstr ""
 msgid "https://poutanen.dev/"
 msgstr ""
 
-#: admin-page.php:20
+#: admin-page.php:24
 msgid "Settings have been reset to defaults."
 msgstr ""
 
-#: admin-page.php:101
+#: admin-page.php:31
+#: elementor-widget.php:57
+msgid "Style"
+msgstr ""
+
+#: admin-page.php:32
+#: elementor-widget.php:58
+msgid "Swiper"
+msgstr ""
+
+#: admin-page.php:33
+#: elementor-widget.php:59
+msgid "Features"
+msgstr ""
+
+#: admin-page.php:43
 msgid "Simple way to embed PDFs on your website"
 msgstr ""
 
-#: admin-page.php:106
+#: admin-page.php:56
 msgid "Usage"
 msgstr ""
 
-#: admin-page.php:107
+#: admin-page.php:57
 msgid "Load in a slider"
 msgstr ""
 
-#: admin-page.php:112
+#: admin-page.php:62
 msgid "Load only a single page"
 msgstr ""
 
-#: admin-page.php:162
+#: admin-page.php:86
+msgid "If your website uses caching, please clear the cache to see your changes after updating settings below (for example: Elementor, LiteSpeed, W3 Total Cache, etc.)"
+msgstr ""
+
+#: admin-page.php:131
 msgid "Save Settings"
 msgstr ""
 
-#: admin-page.php:168
+#: admin-page.php:139
 msgid "Reset to Defaults"
 msgstr ""
 
 #: config.php:66
-#: elementor-widget.php:116
 msgid "Width"
 msgstr ""
 
 #: config.php:67
-#: elementor-widget.php:143
 msgid "Height"
 msgstr ""
 
@@ -148,7 +167,6 @@ msgid "Controls opacity"
 msgstr ""
 
 #: config.php:92
-#: elementor-widget.php:276
 msgid "Slides per view"
 msgstr ""
 
@@ -184,84 +202,32 @@ msgstr ""
 msgid "Show download button"
 msgstr ""
 
-#: elementor-widget.php:58
+#: elementor-widget.php:64
 msgid "Content"
 msgstr ""
 
-#: elementor-widget.php:65
+#: elementor-widget.php:71
 msgid "Use Media Library?"
 msgstr ""
 
-#: elementor-widget.php:67
+#: elementor-widget.php:73
 msgid "Yes"
 msgstr ""
 
-#: elementor-widget.php:68
+#: elementor-widget.php:74
 msgid "No"
 msgstr ""
 
-#: elementor-widget.php:77
+#: elementor-widget.php:83
 msgid "PDF URL"
 msgstr ""
 
-#: elementor-widget.php:80
+#: elementor-widget.php:86
 msgid "https://example.com/sample.pdf"
 msgstr ""
 
-#: elementor-widget.php:91
+#: elementor-widget.php:97
 msgid "Select PDF"
-msgstr ""
-
-#: elementor-widget.php:108
-msgid "Layout"
-msgstr ""
-
-#: elementor-widget.php:168
-msgid "Slides"
-msgstr ""
-
-#: elementor-widget.php:176
-msgid "Background"
-msgstr ""
-
-#: elementor-widget.php:188
-msgid "Border Radius"
-msgstr ""
-
-#: elementor-widget.php:201
-msgid "Border Width"
-msgstr ""
-
-#: elementor-widget.php:214
-msgid "Border Color"
-msgstr ""
-
-#: elementor-widget.php:233
-msgid "Pagination"
-msgstr ""
-
-#: elementor-widget.php:241
-msgid "Color"
-msgstr ""
-
-#: elementor-widget.php:249
-msgid "Active color"
-msgstr ""
-
-#: elementor-widget.php:257
-msgid "Size (px)"
-msgstr ""
-
-#: elementor-widget.php:269
-msgid "Slider"
-msgstr ""
-
-#: elementor-widget.php:285
-msgid "Space between slides (px)"
-msgstr ""
-
-#: elementor-widget.php:294
-msgid "Loop"
 msgstr ""
 
 #: ui.php:43

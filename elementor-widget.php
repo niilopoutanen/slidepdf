@@ -53,7 +53,11 @@ class Elementor_Widget extends \Elementor\Widget_Base
     protected function register_controls(): void
     {
         $config = \SlidePDF\Config::defaults();
-
+        $section_labels = [
+            'style' => esc_html__('Style', 'slidepdf'),
+            'swiper' => esc_html__('Swiper', 'slidepdf'),
+            'features' => esc_html__('Features', 'slidepdf'),
+        ];
         $this->start_controls_section(
             'section_content',
             [
@@ -109,7 +113,7 @@ class Elementor_Widget extends \Elementor\Widget_Base
             $this->start_controls_section(
                 'section_' . $sectionName,
                 [
-                    'label' => ucfirst($sectionName),
+                    'label' => $section_labels[$sectionName] ?? esc_html(ucfirst($sectionName)),
                     'tab' => \Elementor\Controls_Manager::TAB_STYLE,
                 ]
             );

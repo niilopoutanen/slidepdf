@@ -4,8 +4,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: SlidePDF 0.2.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/slidepdf\n"
-"POT-Creation-Date: 2026-02-10T18:09:52+00:00\n"
-"PO-Revision-Date: 2026-02-10 20:10+0200\n"
+"POT-Creation-Date: 2026-02-15T13:28:51+00:00\n"
+"PO-Revision-Date: 2026-02-15 15:29+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: fi\n"
@@ -16,7 +16,8 @@ msgstr ""
 "X-Domain: slidepdf\n"
 
 #. Plugin Name of the plugin
-#: slidepdf.php admin-page.php:100 elementor-widget.php:15
+#: slidepdf.php admin-page.php:11 admin-page.php:12 admin-page.php:42
+#: elementor-widget.php:15
 msgid "SlidePDF"
 msgstr ""
 
@@ -40,39 +41,61 @@ msgstr ""
 msgid "https://poutanen.dev/"
 msgstr ""
 
-#: admin-page.php:20
+#: admin-page.php:24
 msgid "Settings have been reset to defaults."
 msgstr "Asetukset on nollattu oletuksiin."
 
-#: admin-page.php:101
+#: admin-page.php:31 elementor-widget.php:57
+msgid "Style"
+msgstr "Tyylit"
+
+#: admin-page.php:32 elementor-widget.php:58
+msgid "Swiper"
+msgstr "Swiper-asetukset"
+
+#: admin-page.php:33 elementor-widget.php:59
+msgid "Features"
+msgstr "Ominaisuudet"
+
+#: admin-page.php:43
 msgid "Simple way to embed PDFs on your website"
 msgstr "Helppo tapa upottaa PDF-tiedostoja verkkosivuillesi"
 
-#: admin-page.php:106
+#: admin-page.php:56
 msgid "Usage"
 msgstr "Käyttö"
 
-#: admin-page.php:107
+#: admin-page.php:57
 msgid "Load in a slider"
 msgstr "Lataa slider-komponenttiin"
 
-#: admin-page.php:112
+#: admin-page.php:62
 msgid "Load only a single page"
 msgstr "Lataa vain yksi sivu"
 
-#: admin-page.php:162
+#: admin-page.php:86
+msgid ""
+"If your website uses caching, please clear the cache to see your changes "
+"after updating settings below (for example: Elementor, LiteSpeed, W3 Total "
+"Cache, etc.)"
+msgstr ""
+"Jos verkkosivustosi käyttää välimuistia, tyhjennä välimuisti nähdäksesi "
+"muutokset alla olevien asetusten päivittämisen jälkeen (esimerkiksi: "
+"Elementor, LiteSpeed, W3 Total Cache jne.)"
+
+#: admin-page.php:131
 msgid "Save Settings"
 msgstr "Tallenna asetukset"
 
-#: admin-page.php:168
+#: admin-page.php:139
 msgid "Reset to Defaults"
 msgstr "Palauta oletukset"
 
-#: config.php:66 elementor-widget.php:116
+#: config.php:66
 msgid "Width"
 msgstr "Leveys"
 
-#: config.php:67 elementor-widget.php:143
+#: config.php:67
 msgid "Height"
 msgstr "Korkeus"
 
@@ -144,7 +167,7 @@ msgstr "Painikkeiden väli"
 msgid "Controls opacity"
 msgstr "Painikkeiden läpinäkyvyys"
 
-#: config.php:92 elementor-widget.php:276
+#: config.php:92
 msgid "Slides per view"
 msgstr "Dioja per näkymä"
 
@@ -180,86 +203,79 @@ msgstr "Näytä sivunumerot"
 msgid "Show download button"
 msgstr "Näytä latauspainike"
 
-#: elementor-widget.php:58
+#: elementor-widget.php:64
 msgid "Content"
 msgstr "Sisältö"
 
-#: elementor-widget.php:65
+#: elementor-widget.php:71
 msgid "Use Media Library?"
 msgstr "Käytä mediakirjastoa?"
 
-#: elementor-widget.php:67
+#: elementor-widget.php:73
 msgid "Yes"
 msgstr "Kyllä"
 
-#: elementor-widget.php:68
+#: elementor-widget.php:74
 msgid "No"
 msgstr "Ei"
 
-#: elementor-widget.php:77
+#: elementor-widget.php:83
 msgid "PDF URL"
 msgstr "PDF URL"
 
-#: elementor-widget.php:80
+#: elementor-widget.php:86
 msgid "https://example.com/sample.pdf"
 msgstr ""
 
-#: elementor-widget.php:91
+#: elementor-widget.php:97
 msgid "Select PDF"
 msgstr "Valitse PDF"
-
-#: elementor-widget.php:108
-msgid "Layout"
-msgstr "Asettelu"
-
-#: elementor-widget.php:168
-msgid "Slides"
-msgstr "Diat"
-
-#: elementor-widget.php:176
-msgid "Background"
-msgstr "Tausta"
-
-#: elementor-widget.php:188
-msgid "Border Radius"
-msgstr "Reunan pyöreys"
-
-#: elementor-widget.php:201
-msgid "Border Width"
-msgstr "Reunan leveys"
-
-#: elementor-widget.php:214
-msgid "Border Color"
-msgstr "Reunan väri"
-
-#: elementor-widget.php:233
-msgid "Pagination"
-msgstr "Sivunumerot"
-
-#: elementor-widget.php:241
-msgid "Color"
-msgstr "Väri"
-
-#: elementor-widget.php:249
-msgid "Active color"
-msgstr "Aktiivinen väri"
-
-#: elementor-widget.php:257
-msgid "Size (px)"
-msgstr "Koko (px)"
-
-#: elementor-widget.php:269
-msgid "Slider"
-msgstr "Slider-komponentti"
-
-#: elementor-widget.php:285
-msgid "Space between slides (px)"
-msgstr "Diojen välitys (px)"
-
-#: elementor-widget.php:294
-msgid "Loop"
-msgstr "Toista uudelleen"
 
 #: ui.php:43 ui.php:70
 msgid "Download PDF"
 msgstr "Lataa PDF"
+
+#~ msgid "GitHub banner"
+#~ msgstr "WordPress-painike"
+
+#~ msgid "WordPress banner"
+#~ msgstr "WordPress-painike"
+
+#~ msgid "Layout"
+#~ msgstr "Asettelu"
+
+#~ msgid "Slides"
+#~ msgstr "Diat"
+
+#~ msgid "Background"
+#~ msgstr "Tausta"
+
+#~ msgid "Border Radius"
+#~ msgstr "Reunan pyöreys"
+
+#~ msgid "Border Width"
+#~ msgstr "Reunan leveys"
+
+#~ msgid "Border Color"
+#~ msgstr "Reunan väri"
+
+#~ msgid "Pagination"
+#~ msgstr "Sivunumerot"
+
+#~ msgid "Color"
+#~ msgstr "Väri"
+
+#~ msgid "Active color"
+#~ msgstr "Aktiivinen väri"
+
+#~ msgid "Size (px)"
+#~ msgstr "Koko (px)"
+
+#~ msgid "Slider"
+#~ msgstr "Slider-komponentti"
+
+#~ msgid "Space between slides (px)"
+#~ msgstr "Diojen välitys (px)"
+
+#~ msgid "Loop"
+#~ msgstr "Toista uudelleen"
