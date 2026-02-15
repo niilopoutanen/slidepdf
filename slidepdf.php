@@ -5,7 +5,7 @@ namespace SlidePDF;
  * Plugin Name:       SlidePDF
  * Plugin URI:        https://github.com/niilopoutanen/slidepdf
  * Description:       Load a PDF file into a embedded slider viewer.
- * Version:           0.2.4
+ * Version:           0.2.5
  * Author:            Niilo Poutanen
  * Author URI:        https://poutanen.dev/
  * Text Domain:       slidepdf
@@ -18,9 +18,10 @@ if (!defined('ABSPATH')) {
     exit;
 }
 
+require_once plugin_dir_path(__FILE__) . 'config.php';
 require_once plugin_dir_path(__FILE__) . 'ui.php';
 require_once plugin_dir_path(__FILE__) . 'admin-page.php';
-require_once plugin_dir_path(__FILE__) . 'config.php';
+
 function register_scripts()
 {
     wp_register_script(

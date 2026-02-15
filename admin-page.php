@@ -14,19 +14,6 @@ add_action("admin_menu", function () {
         '\SlidePDF\render_page'
     );
 });
-add_action('admin_post_slidepdf_reset', function () {
-
-    if (!current_user_can('install_plugins')) {
-        wp_die('Unauthorized');
-    }
-
-    check_admin_referer('slidepdf_reset_action');
-
-    delete_option(\SlidePDF\Config::OPTION_KEY);
-
-    wp_redirect(add_query_arg('slidepdf_reset', '1', wp_get_referer()));
-    exit;
-});
 
 function render_page()
 {
@@ -37,9 +24,7 @@ function render_page()
     }
 
     $base_url = plugin_dir_url(__FILE__);
-    $config = Config::getItems();
-
-    wp_enqueue_style('slidepdf-admin'); ?>
+    $config = Config::getItems(); ?>
 
 
     <div class="slidepdf settings">
@@ -71,15 +56,15 @@ function render_page()
                 <?php echo esc_html__('Load in a slider', 'slidepdf'); ?>
             </span>
             <code class="shortcode" onclick="copyShortcode(this)">
-                                            [slidepdf src="https://example.com/file.pdf"]
-                                        </code>
+                [slidepdf src="https://example.com/file.pdf"]
+            </code>
 
             <span class="label">
                 <?php echo esc_html__('Load only a single page', 'slidepdf'); ?>
             </span>
             <code class="shortcode" onclick="copyShortcode(this)">
-                                            [slidepdf src="https://example.com/file.pdf" page="2"]
-                                        </code>
+                [slidepdf src="https://example.com/file.pdf" page="2"]
+            </code>
 
             <script>
                 function copyShortcode(code) {
