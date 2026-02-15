@@ -1,0 +1,139 @@
+:root {
+    accent-color: #de2b2b;
+}
+
+.slidepdf.settings {
+    display: flex;
+    flex-direction: column;
+    margin-right: 20px;
+}
+
+.section {
+    padding: 40px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Inter", sans-serif;
+
+}
+
+.section.bg {
+    background-color: white;
+    border-radius: 20px;
+    margin: 20px;
+    padding: 30px;
+}
+.section.bg h2{
+    margin-top: 0;
+}
+
+.section.submitbuttons {
+    padding-bottom: 10px;
+    padding-top: 0;
+}
+
+.section.submitbuttons .submit {
+    padding: 0;
+    margin: 0;
+}
+
+.section.header {
+    gap: 40px;
+    display: flex;
+    padding: 20px;
+    margin-top: 30px;
+    flex-direction: row;
+    align-items: center;
+}
+
+@media only screen and (max-width: 700px) {
+    .section.header {
+        flex-direction: column;
+        align-items: start;
+    }
+}
+
+@media only screen and (max-width: 700px) {
+
+    .section,
+    .section.header {
+        padding: 30px;
+    }
+}
+
+.header .links {
+    display: flex;
+    gap: 10px;
+
+}
+
+h2 {
+    font-size: 25px;
+    font-weight: 600;
+}
+
+.header .links .banner {
+    height: 50px;
+}
+
+.header .icon {
+    width: 200px;
+    height: 200px;
+    object-fit: contain;
+}
+
+.header .content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.header h1 {
+    font-size: 50px;
+    font-weight: 600;
+    margin: 0;
+}
+
+.header p {
+    font-size: 20px;
+}
+
+.control {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    align-items: center;
+}
+
+.control label {
+    width: 100%;
+}
+
+.control input {
+    background-color: #f4f4f4;
+    border: 2px solid #dadada;
+    border-radius: 10px;
+}
+
+.control input[type="text"] {
+    padding: 5px 10px;
+}
+
+
+.shortcode {
+    background-color: #f3f3f3;
+    border-radius: 10px;
+    border: 2px solid #dadada;
+    padding: 15px;
+    cursor: pointer;
+}
+
+.label {
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+#footer-thankyou {
+    display: none;
+}

@@ -14,6 +14,19 @@ add_action("admin_menu", function () {
         '\SlidePDF\render_page'
     );
 });
+add_action('admin_post_slidepdf_reset', function () {
+
+    if (!current_user_can('install_plugins')) {
+        wp_die('Unauthorized');
+    }
+
+    check_admin_referer('slidepdf_reset_action');
+
+    delete_option(\SlidePDF\Config::OPTION_KEY);
+
+    wp_redirect(add_query_arg('slidepdf_reset', '1', wp_get_referer()));
+    exit;
+});
 
 function render_page()
 {
@@ -23,153 +36,130 @@ function render_page()
         echo '<div class="updated notice"><p>' . esc_html__('Settings have been reset to defaults.', 'slidepdf') . '</p></div>';
     }
 
-    $config = Config::getItems(); ?>
+    $base_url = plugin_dir_url(__FILE__);
+    $config = Config::getItems();
 
-    <style>
-        .section.header {
-            gap: 40px;
-            display: flex;
-            padding-bottom: 0;
-            flex-direction: row;
-            align-items: center;
-        }
+    wp_enqueue_style('slidepdf-admin'); ?>
 
-        .header .icon {
-            width: 200px;
-            height: 200px;
-            object-fit: contain;
-        }
 
-        .header .content {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        .header h1 {
-            font-size: 50px;
-            font-weight: 600;
-            margin: 0;
-        }
-
-        .header p {
-            font-size: 20px;
-        }
-        .control{
-            display: flex;
-            flex-wrap: wrap;
-            gap: 5px;
-            align-items: center;
-        }
-        
-        .control label{
-            width: 100%;
-        }
-        .control input{
-            background-color: #ffffff;
-            border: 2px solid #dadada;
-            border-radius: 10px;
-        }
-
-        .control input[type="text"]{
-            padding: 5px 10px;
-        }
-        .section {
-            padding: 50px;
-            box-sizing: border-box;
-            padding-bottom: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: start;
-        }
-
-        .shortcode {
-            background-color: #ffffff;
-            border-radius: 10px;
-            border: 2px solid #dadada;
-            padding: 15px;
-            cursor: pointer;
-        }
-
-        .label {
-            margin-top: 10px;
-            margin-bottom: 5px;
-        }
-    </style>
-
-    <div class="header section">
-        <img class="icon" src="<?php echo plugin_dir_url(__FILE__) . 'assets/icon.svg'; ?>" />
-        <div class="content">
-            <h1><?php echo esc_html__('SlidePDF', 'slidepdf'); ?></h1>
-            <p><?php echo esc_html__('Simple way to embed PDFs on your website', 'slidepdf'); ?></p>
-        </div>
-    </div>
-
-    <div class="section guide">
-        <h2><?php echo esc_html__('Usage', 'slidepdf'); ?></h2>
-        <span class="label"><?php echo esc_html__('Load in a slider', 'slidepdf'); ?></span>
-        <code class="shortcode" onclick="copyShortcode(this)">
-                    [slidepdf src="https://example.com/file.pdf"]
-                </code>
-
-        <span class="label"><?php echo esc_html__('Load only a single page', 'slidepdf'); ?></span>
-        <code class="shortcode" onclick="copyShortcode(this)">
-                    [slidepdf src="https://example.com/file.pdf" page="2"]
-                </code>
-
-        <script>
-            function copyShortcode(code) {
-                navigator.clipboard.writeText(code.textContent);
-            }
-        </script>
-    </div>
-
-    <form method="post" action="options.php">
-        <?php settings_fields(Config::OPTION_KEY); ?>
-
-        <?php foreach ($config as $sectionName => $items): ?>
-            <div class="section <?php echo esc_attr($sectionName); ?>">
-                <h2><?php echo esc_html(ucfirst($sectionName)); ?></h2>
-
-                <?php foreach ($items as $item): ?>
-                    <?php
-                    $type = $item->inputType();
-                    $attrs = $item->inputAttributes();
-                    $value = $type === 'checkbox' ? 1 : $item->value;
-                    $checked = $type === 'checkbox' && $item->value ? 'checked' : '';
-                    $label = esc_html($item->name);
-                    $id = esc_attr($sectionName . '_' . $item->id);
-                    $name = esc_attr("slidepdf_config[{$sectionName}][{$item->id}]");
-                    ?>
-
-                    <div class="control">
-                        <label class="label" for="<?php echo $id; ?>">
-                            <?php echo $label; ?>
-                        </label>
-
-                        <?php if ($type === 'checkbox'): ?>
-                            <input type="checkbox" id="<?php echo $id; ?>" name="<?php echo $name; ?>" value="1" <?php echo $checked; ?>>
-                        <?php else: ?>
-                            <input type="<?php echo esc_attr($type); ?>" id="<?php echo $id; ?>" name="<?php echo $name; ?>"
-                                value="<?php echo esc_attr($value); ?>" <?php echo $attrs; ?>>
-                            <?php if ($item->unit): ?>
-                                <span><?php echo esc_html($item->unit); ?></span>
-                            <?php endif; ?>
-                        <?php endif; ?>
-                    </div>
-
-                <?php endforeach; ?>
+    <div class="slidepdf settings">
+        <div class="header section">
+            <img class="icon" src="<?php echo $base_url . 'static/icon.png'; ?>" />
+            <div class="content">
+                <h1>
+                    <?php echo esc_html__('SlidePDF', 'slidepdf'); ?>
+                </h1>
+                <p>
+                    <?php echo esc_html__('Simple way to embed PDFs on your website', 'slidepdf'); ?>
+                </p>
+                <div class="links">
+                    <a href="https://github.com/niilopoutanen/slidepdf" target="_blank">
+                        <img class="banner" src="<?php echo $base_url . 'static/github-banner.svg'; ?>" />
+                    </a>
+                    <a href="https://wordpress.org/plugins/slidepdf/" target="_blank">
+                        <img class="banner" src="<?php echo $base_url . 'static/wp-banner.svg'; ?>" />
+                    </a>
+                </div>
             </div>
-        <?php endforeach; ?>
+        </div>
 
-        <?php submit_button(__('Save Settings', 'slidepdf')); ?>
-    </form>
+        <div class="section guide bg">
+            <h2>
+                <?php echo esc_html__('Usage', 'slidepdf'); ?>
+            </h2>
+            <span class="label">
+                <?php echo esc_html__('Load in a slider', 'slidepdf'); ?>
+            </span>
+            <code class="shortcode" onclick="copyShortcode(this)">
+                                            [slidepdf src="https://example.com/file.pdf"]
+                                        </code>
 
-    <form method="post" action="">
-        <?php wp_nonce_field('slidepdf_reset_defaults'); ?>
-        <input type="hidden" name="slidepdf_reset" value="1">
-        <?php submit_button(esc_html__('Reset to Defaults', 'slidepdf'), 'secondary'); ?>
-    </form>
+            <span class="label">
+                <?php echo esc_html__('Load only a single page', 'slidepdf'); ?>
+            </span>
+            <code class="shortcode" onclick="copyShortcode(this)">
+                                            [slidepdf src="https://example.com/file.pdf" page="2"]
+                                        </code>
+
+            <script>
+                function copyShortcode(code) {
+                    const text = code.textContent.trim();
+
+                    if (navigator.clipboard && window.isSecureContext) {
+                        navigator.clipboard.writeText(text);
+                    } else {
+                        const textarea = document.createElement("textarea");
+                        textarea.value = text;
+                        textarea.style.position = "fixed";
+                        textarea.style.opacity = "0";
+                        document.body.appendChild(textarea);
+                        textarea.focus();
+                        textarea.select();
+                        document.execCommand("copy");
+                        document.body.removeChild(textarea);
+                    }
+                }
+            </script>
+
+        </div>
+
+        <form method="post" action="options.php">
+            <?php settings_fields(Config::OPTION_KEY); ?>
+
+            <?php foreach ($config as $sectionName => $items): ?>
+                <div class="section bg <?php echo esc_attr($sectionName); ?>">
+                    <h2>
+                        <?php echo esc_html(ucfirst($sectionName)); ?>
+                    </h2>
+
+                    <?php foreach ($items as $item): ?>
+                        <?php
+                        $type = $item->inputType();
+                        $attrs = $item->inputAttributes();
+                        $value = $type === 'checkbox' ? 1 : $item->value;
+                        $checked = $type === 'checkbox' && $item->value ? 'checked' : '';
+                        $label = esc_html($item->name);
+                        $id = esc_attr($sectionName . '_' . $item->id);
+                        $name = esc_attr("slidepdf_config[{$sectionName}][{$item->id}]");
+                        ?>
+
+                        <div class="control">
+                            <label class="label" for="<?php echo $id; ?>">
+                                <?php echo $label; ?>
+                            </label>
+
+                            <?php if ($type === 'checkbox'): ?>
+                                <input type="checkbox" id="<?php echo $id; ?>" name="<?php echo $name; ?>" value="1" <?php echo $checked; ?>>
+                            <?php else: ?>
+                                <input type="<?php echo esc_attr($type); ?>" id="<?php echo $id; ?>" name="<?php echo $name; ?>"
+                                    value="<?php echo esc_attr($value); ?>" <?php echo $attrs; ?>>
+                                <?php if ($item->unit): ?>
+                                    <span>
+                                        <?php echo esc_html($item->unit); ?>
+                                    </span>
+                                <?php endif; ?>
+                            <?php endif; ?>
+                        </div>
+
+                    <?php endforeach; ?>
+                </div>
+            <?php endforeach; ?>
+
+            <div class="section submitbuttons">
+                <?php submit_button(__('Save Settings', 'slidepdf')); ?>
+            </div>
+        </form>
+
+        <div class="section submitbuttons">
+            <form method="post" action="">
+                <?php wp_nonce_field('slidepdf_reset_defaults'); ?>
+                <input type="hidden" name="slidepdf_reset" value="1">
+                <?php submit_button(esc_html__('Reset to Defaults', 'slidepdf'), 'secondary'); ?>
+            </form>
+        </div>
+
+    </div>
+
 
 
     <?php

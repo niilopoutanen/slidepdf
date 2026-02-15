@@ -17,7 +17,7 @@ class UI
         $config = array_replace_recursive($stored, $config);
 
         $chevron_svg = file_get_contents(
-            plugin_dir_path(__FILE__) . 'assets/chevron.svg'
+            plugin_dir_path(__FILE__) . 'static/chevron.svg'
         );
 
 
