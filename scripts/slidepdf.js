@@ -47,6 +47,11 @@ function initSlidePDF(root) {
                     el: root.querySelector('.swiper-pagination'),
                     clickable: true,
                 },
+                freeMode: {
+                    enabled: true,
+                    sticky: true,
+                    momentum: true,
+                },
                 navigation: {
                     nextEl: root.querySelector('.next'),
                     prevEl: root.querySelector('.previous'),
